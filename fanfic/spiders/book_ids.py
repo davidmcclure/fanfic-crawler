@@ -1,6 +1,6 @@
 
 
-from scrapy import Spider
+from scrapy import Spider, Request
 
 
 class BookIdsSpider(Spider):
@@ -17,9 +17,19 @@ class BookIdsSpider(Spider):
         Collect book ids, continue to the next page.
         """
 
-        for href in response.css('a.stitle::attr(href)'):
+        for href in response.xpath('//a[@class="stitle"]/@href').extract():
 
-            book_id = href.extract().split('/')[2]
+            book_id = href.split('/')[2]
 
             # TODO: Yield BookId item.
             print(book_id)
+
+        next_href = (
+            response
+            .xpath('//a[text()="Next »"]/@href')
+            .extract_first()
+        )
+
+        next_url = response.urljoin(next_href)
+
+        yield Request(next_url, callback=self.parse)
