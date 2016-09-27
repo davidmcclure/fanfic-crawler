@@ -1,7 +1,12 @@
 
 
-import scrapy
+from scrapy import Item, Field
 
 
-class BookIdItem(scrapy.Item):
-    id = scrapy.Field()
+# TODO: BookItem, with metadata?
+class BookIdItem(Item):
+    id = Field()
+
+
+class ChapterItem(Item):
+    text = Field()

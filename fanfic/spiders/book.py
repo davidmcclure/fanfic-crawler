@@ -2,7 +2,7 @@
 
 from scrapy import Spider, Request
 
-from fanfic.items import BookIdItem
+from fanfic.items import ChapterItem
 
 
 class BookSpider(Spider):
@@ -28,4 +28,4 @@ class BookSpider(Spider):
 
         text = ' '.join(nodes)
 
-        print(text)
+        yield ChapterItem(text=text)
