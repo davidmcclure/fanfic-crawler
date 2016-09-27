@@ -2,6 +2,8 @@
 
 from scrapy import Spider, Request
 
+from fanfic.items import BookIdItem
+
 
 class BookIdsSpider(Spider):
 
@@ -21,8 +23,7 @@ class BookIdsSpider(Spider):
 
             book_id = href.split('/')[2]
 
-            # TODO: Yield BookId item.
-            print(book_id)
+            yield BookIdItem(id=book_id)
 
         next_href = (
             response
