@@ -19,11 +19,15 @@ class BookIdsSpider(Spider):
         Collect book ids, continue to the next page.
         """
 
+        # Generate books ids.
+
         for href in res.xpath('//a[@class="stitle"]/@href').extract():
 
             book_id = href.split('/')[2]
 
             yield BookIdItem(id=book_id)
+
+        # Continue to next page.
 
         next_href = (
             res
