@@ -13,24 +13,24 @@ class BookIdsSpider(Spider):
         'https://www.fanfiction.net/book/Harry-Potter/?r=10&len=60',
     ]
 
-    def parse(self, response):
+    def parse(self, res):
 
         """
         Collect book ids, continue to the next page.
         """
 
-        for href in response.xpath('//a[@class="stitle"]/@href').extract():
+        for href in res.xpath('//a[@class="stitle"]/@href').extract():
 
             book_id = href.split('/')[2]
 
             yield BookIdItem(id=book_id)
 
         next_href = (
-            response
+            res
             .xpath('//a[text()="Next »"]/@href')
             .extract_first()
         )
 
-        next_url = response.urljoin(next_href)
+        next_url = res.urljoin(next_href)
 
-        yield Request(next_url, callback=self.parse)
+        yield Request(next_url)
