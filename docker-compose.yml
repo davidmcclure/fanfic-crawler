@@ -1,0 +1,22 @@
+---
+
+version: '2'
+
+services:
+
+  db:
+
+    image: postgres:9.6
+    hostname: db
+
+    # TODO: ENV-ify?
+    environment:
+      - POSTGRES_USER=fanfic
+      - POSTGRES_PASSWORD=fanfic
+      - POSTGRES_DB=fanfic
+
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:3.0.7
