@@ -17,3 +17,6 @@ services:
 
   redis:
     image: redis:3.0.7
+
+  fanfic:
+    build: ./fanfic
