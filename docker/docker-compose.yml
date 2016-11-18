@@ -16,7 +16,11 @@ services:
       - postgres.env
 
   redis:
+
     image: redis:3.0.7
+
+    ports:
+      - '6379:6379'
 
   fanfic:
     build: ./fanfic
