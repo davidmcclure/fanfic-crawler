@@ -1,3 +1,4 @@
 
 ipython
 scrapy
+alembic
