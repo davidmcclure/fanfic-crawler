@@ -1,4 +1,5 @@
 
 ipython
 scrapy
+psycopg2
 alembic
