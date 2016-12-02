@@ -2,8 +2,7 @@
 
 from scrapy import Spider, Request
 
-from fanfic.items import SqlItem
-from fanfic.models import BookId
+from fanfic.items import BookIdItem
 
 
 class BookIdsSpider(Spider):
@@ -16,7 +15,7 @@ class BookIdsSpider(Spider):
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'fanfic.pipelines.BookIdPipeline': 100,
+            'fanfic.pipelines.SQLAlchemyPipeline': 100,
         }
     }
 
@@ -32,7 +31,7 @@ class BookIdsSpider(Spider):
 
             book_id = int(href.split('/')[2])
 
-            yield SqlItem(model=BookId, fields=dict(book_id=book_id))
+            yield BookIdItem(book_id=book_id)
 
         # Continue to next page.
 

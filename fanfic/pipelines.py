@@ -4,16 +4,13 @@ from fanfic.database import session
 from fanfic.models import BookId
 
 
-class BookIdPipeline(object):
+class SQLAlchemyPipeline(object):
 
     def process_item(self, item, spider):
 
         """
-        Save a book id.
+        Save a database row.
         """
 
-        row = item['model'](**item['fields'])
-
-        session.add(row)
-
+        session.add(item.row())
         session.commit()

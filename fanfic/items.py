@@ -1,13 +1,40 @@
 
 
-from scrapy import Item, Field
+from scrapy.item import Item, Field, ItemMeta
+
+from fanfic.models import BookId
 
 
-class SqlItem(Item):
+class SQLAlchemyItemMeta(ItemMeta):
 
-    model = Field()
+    def __new__(meta, name, bases, dct):
 
-    fields = Field()
+        """
+        Set item fields from SQLAlchemy columns.
+        """
+
+        cls = ItemMeta.__new__(meta, name, bases, dct)
+
+        if cls.model:
+
+            for col in cls.model.__table__.columns:
+                cls.fields[col.name] = Field()
+
+        return cls
+
+
+class SQLAlchemyItem(Item, metaclass=SQLAlchemyItemMeta):
+
+    model = None
 
     def row(self):
-        return self['model'](**self['fields'])
+
+        """
+        Make the SQLAlchemy model instance.
+        """
+
+        return self.model(**self)
+
+
+class BookIdItem(SQLAlchemyItem):
+    model = BookId
