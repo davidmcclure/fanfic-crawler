@@ -43,7 +43,10 @@ class BookChapterSpider(Spider):
             .extract_first()
         )
 
-        next_href = re.search('\'(?P<url>.*)\'', next_onclick).group('url')
+        next_href = (
+            re.search('\'(?P<url>.*)\'', next_onclick)
+            .group('url')
+        )
 
         next_url = res.urljoin(next_href)
 
