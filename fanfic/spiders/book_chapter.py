@@ -1,8 +1,10 @@
 
 
+import re
+
 from scrapy import Spider, Request
 
-from fanfic.items import BookIdItem
+from fanfic.items import ChapterItem
 
 
 class BookChapterSpider(Spider):
@@ -18,4 +20,31 @@ class BookChapterSpider(Spider):
         Collect chapter text, continue to the next page.
         """
 
-        pass
+        chapter_number = int(
+            res.selector
+            .xpath('//select[@id="chap_select"]/option[@selected]/@value')
+            .extract_first()
+        )
+
+        content = (
+            res.selector
+            .xpath('//div[@id="storytextp"]')
+            .extract_first()
+        )
+
+        yield ChapterItem(
+            chapter_number=chapter_number,
+            content=content,
+        )
+
+        next_onclick = (
+            res.selector
+            .xpath('//button[text()="Next >"]/@onclick')
+            .extract_first()
+        )
+
+        next_href = re.search('\'(?P<url>.*)\'', next_onclick).group('url')
+
+        next_url = res.urljoin(next_href)
+
+        yield Request(next_url)
