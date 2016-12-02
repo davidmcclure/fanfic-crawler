@@ -5,9 +5,9 @@ from scrapy import Spider, Request
 from fanfic.items import BookIdItem
 
 
-class BookIdsSpider(Spider):
+class BookIdSpider(Spider):
 
-    name = 'book_ids'
+    name = 'book_id'
 
     start_urls = [
         'https://www.fanfiction.net/book/Harry-Potter/?r=10&len=60',
