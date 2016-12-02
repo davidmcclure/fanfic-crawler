@@ -2,7 +2,8 @@
 
 from scrapy import Spider, Request
 
-from fanfic.items import BookIdItem
+from fanfic.items import SqlItem
+from fanfic.models import BookId
 
 
 class BookIdsSpider(Spider):
@@ -31,7 +32,7 @@ class BookIdsSpider(Spider):
 
             book_id = int(href.split('/')[2])
 
-            yield BookIdItem(book_id=book_id)
+            yield SqlItem(model=BookId, fields=dict(book_id=book_id))
 
         # Continue to next page.
 

@@ -3,3 +3,4 @@ ipython
 scrapy
 psycopg2
 invoke
+scrapy_sqlitem

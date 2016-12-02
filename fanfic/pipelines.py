@@ -12,5 +12,8 @@ class BookIdPipeline(object):
         Save a book id.
         """
 
-        session.add(BookId(**item))
+        row = item['model'](**item['fields'])
+
+        session.add(row)
+
         session.commit()

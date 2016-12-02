@@ -14,3 +14,15 @@ def init_db(ctx):
     """
 
     Base.metadata.create_all(engine)
+
+
+@task
+def reset_db(ctx):
+
+    """
+    Drop and recreate database tables.
+    """
+
+    Base.metadata.drop_all(engine)
+
+    init_db(ctx)
