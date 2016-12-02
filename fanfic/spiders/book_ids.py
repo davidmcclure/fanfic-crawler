@@ -13,6 +13,12 @@ class BookIdsSpider(Spider):
         'https://www.fanfiction.net/book/Harry-Potter/?r=10&len=60',
     ]
 
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'fanfic.pipelines.BookIdPipeline': 100,
+        }
+    }
+
     def parse(self, res):
 
         """
@@ -23,9 +29,9 @@ class BookIdsSpider(Spider):
 
         for href in res.xpath('//a[@class="stitle"]/@href').extract():
 
-            book_id = href.split('/')[2]
+            book_id = int(href.split('/')[2])
 
-            yield BookIdItem(id=book_id)
+            yield BookIdItem(book_id=book_id)
 
         # Continue to next page.
 

@@ -7,15 +7,15 @@ from sqlalchemy.engine.url import URL
 
 # TODO: Config-ify.
 
-
 url = URL(**dict(
-    drivername='postgres',
-    database='fanfic',
+    drivername='sqlite',
+    database='fanfic.db',
 ))
 
-engine = create_engine(url)
 
-# Fix transaction bugs in pysqlite.
+# Build engine.
+
+engine = create_engine(url)
 
 @event.listens_for(engine, 'connect')
 def connect(conn, record):
