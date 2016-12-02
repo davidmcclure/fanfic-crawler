@@ -14,3 +14,5 @@ class SQLAlchemyPipeline(object):
 
         session.add(item.row())
         session.commit()
+
+        return item
