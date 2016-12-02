@@ -13,12 +13,6 @@ class BookIdsSpider(Spider):
         'https://www.fanfiction.net/book/Harry-Potter/?r=10&len=60',
     ]
 
-    custom_settings = {
-        'ITEM_PIPELINES': {
-            'fanfic.pipelines.SQLAlchemyPipeline': 100,
-        }
-    }
-
     def parse(self, res):
 
         """

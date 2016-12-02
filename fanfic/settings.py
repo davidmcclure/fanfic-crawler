@@ -92,3 +92,7 @@ ROBOTSTXT_OBEY = True
 
 
 DOWNLOAD_DELAY = 3
+
+ITEM_PIPELINES = {
+   'fanfic.pipelines.SQLAlchemyPipeline': 100,
+}
