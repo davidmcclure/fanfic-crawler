@@ -6,24 +6,12 @@ from scrapy import Spider, Request
 
 from fanfic.items import ChapterItem
 
+from .book import BookSpider
 
-class ChapterSpider(Spider):
+
+class ChapterSpider(BookSpider):
 
     name = 'chapter'
-
-    def __init__(self, book_id, *args, **kwargs):
-
-        """
-        Set the book id.
-        """
-
-        super().__init__(*args, **kwargs)
-
-        url = 'https://www.fanfiction.net/s/{}'.format(book_id)
-
-        self.start_urls = [url]
-
-        self.book_id = book_id
 
     def parse(self, res):
 
