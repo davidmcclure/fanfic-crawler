@@ -14,6 +14,18 @@ class BookChapterSpider(Spider):
     # TODO: Parametrize.
     start_urls = ['https://www.fanfiction.net/s/11762850']
 
+    def __init__(self, book_id, *args, **kwargs):
+
+        """
+        Set the book id.
+        """
+
+        super().__init__(*args, **kwargs)
+
+        self.start_urls = ['https://www.fanfiction.net/s/11762850']
+
+        self.book_id = book_id
+
     def parse(self, res):
 
         """
@@ -33,6 +45,7 @@ class BookChapterSpider(Spider):
         )
 
         yield ChapterItem(
+            book_id=self.book_id,
             chapter_number=chapter_number,
             content=content,
         )

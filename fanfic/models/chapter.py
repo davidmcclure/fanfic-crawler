@@ -11,6 +11,6 @@ class Chapter(Base):
 
     book_id = Column(Integer, primary_key=True)
 
-    chapter_number = Column(Integer, nullable=False)
+    chapter_number = Column(Integer, primary_key=True)
 
     content = Column(String, nullable=False)
