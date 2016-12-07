@@ -4,6 +4,8 @@ import re
 
 from scrapy import Spider, Request
 
+from fanfic.utils import href_to_id
+
 from .book import BookSpider
 
 
@@ -23,4 +25,10 @@ class MetadataSpider(BookSpider):
             .extract_first()
         )
 
-        print(title)
+        user_id = href_to_id(
+            res.selector
+            .xpath('//div[@id="profile_top"]/a/@href')
+            .extract_first()
+        )
+
+        print(user_id)
