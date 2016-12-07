@@ -7,12 +7,9 @@ from scrapy import Spider, Request
 from fanfic.items import ChapterItem
 
 
-class BookChapterSpider(Spider):
+class ChapterSpider(Spider):
 
-    name = 'book_chapter'
-
-    # TODO: Parametrize.
-    start_urls = ['https://www.fanfiction.net/s/11762850']
+    name = 'chapter'
 
     def __init__(self, book_id, *args, **kwargs):
 
@@ -22,7 +19,9 @@ class BookChapterSpider(Spider):
 
         super().__init__(*args, **kwargs)
 
-        self.start_urls = ['https://www.fanfiction.net/s/11762850']
+        url = 'https://www.fanfiction.net/s/{}'.format(book_id)
+
+        self.start_urls = [url]
 
         self.book_id = book_id
 
