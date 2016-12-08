@@ -2,6 +2,9 @@
 
 import re
 
+from dateutil.parser import parse as dateutil_parse
+from datetime import date
+
 
 def href_to_id(href: str) -> int:
 
@@ -29,6 +32,19 @@ def atoi(value: str) -> int:
     """
 
     return int(value.replace(',', ''))
+
+
+def parse_date(value: str):
+
+    """
+    Try to parse a date string. On failure, return today.
+    """
+
+    try:
+        return dateutil_parse(value).date()
+
+    except ValueError:
+        return date.today()
 
 
 def parse_metadata(raw: str) -> dict:
