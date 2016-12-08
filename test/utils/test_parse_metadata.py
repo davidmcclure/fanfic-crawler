@@ -2,6 +2,8 @@
 
 import pytest
 
+from datetime import date
+
 from fanfic.utils import parse_metadata
 
 
@@ -23,6 +25,7 @@ from fanfic.utils import parse_metadata
             characters='Hermione G., Sirius B., Remus L., Marauders',
             favorites=620,
             follows=1002,
+            published=date(2015, 3, 21),
         )
 
     ),
