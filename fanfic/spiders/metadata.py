@@ -31,4 +31,37 @@ class MetadataSpider(BookSpider):
             .extract_first()
         )
 
-        print(user_id)
+        username = (
+            res.selector
+            .xpath('//div[@id="profile_top"]/a/text()')
+            .extract_first()
+        )
+
+        summary = (
+            res.selector
+            .xpath('//div[@id="profile_top"]/div/text()')
+            .extract_first()
+        )
+
+        raw_metadata = ''.join(
+            res.selector
+            .xpath('''
+                //div[@id="profile_top"]/
+                span[position()=last()]//text()
+            ''')
+            .extract()
+        )
+
+        parts = raw_metadata.split('-')
+
+        metadata = dict([
+            part.split(':')
+            for part in parts
+            if ':' in part
+        ])
+
+        genres = parts[2]
+
+        characters = parts[3]
+
+        print(metadata)
