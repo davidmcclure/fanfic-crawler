@@ -2,7 +2,7 @@
 
 import pytest
 
-# from fanfic.utils import parse_metadata
+from fanfic.utils import parse_metadata
 
 
 @pytest.mark.skip
@@ -29,5 +29,5 @@ import pytest
     ),
 
 ])
-def test_test(raw, parsed):
+def test_parse_metadata(raw, parsed):
     assert parse_metadata(raw) == parsed

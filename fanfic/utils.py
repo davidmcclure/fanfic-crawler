@@ -22,22 +22,30 @@ def clean_string(value: str) -> str:
     return re.sub('\s+', ' ', value.strip())
 
 
-# def parse_metadata(raw: str) -> dict:
+def atoi(value: str) -> int:
 
-    # """
-    # Parse the metadata string.
-    # """
+    """
+    Replace commas, parse int.
+    """
 
-    # parts = raw.split('-')
+    return int(value.replace(',', ''))
 
-    # metadata = dict([
-        # map(strip, part.split(':'))
-        # for part in parts
-        # if ':' in part
-    # ])
 
-    # characters = parts[3]
+def parse_metadata(raw: str) -> dict:
 
-    # genres = parts[2]
+    """
+    Parse the metadata string.
+    """
 
-    # return metadata
+    parts = raw.split('-')
+
+    metadata = dict([
+        [clean_string(p) for p in part.split(':')]
+        for part in parts if ':' in part
+    ])
+
+    characters = clean_string(parts[3])
+
+    genres = clean_string(parts[2])
+
+    # TODO

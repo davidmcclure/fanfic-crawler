@@ -17,5 +17,5 @@ from fanfic.utils import clean_string
     ('test1  test2', 'test1 test2'),
 
 ])
-def test_test(raw, clean):
+def test_clean_string(raw, clean):
     assert clean_string(raw) == clean
