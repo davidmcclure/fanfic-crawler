@@ -4,8 +4,7 @@ import re
 
 from scrapy import Spider, Request
 
-from fanfic.items import ReviewItem
-from fanfic.utils import extract_int
+from fanfic.items import ReviewHTMLItem
 
 from .book import BookSpider
 
@@ -26,17 +25,10 @@ class ReviewSpider(BookSpider):
 
         for tr in res.selector.xpath('//table[@id="gui_table1i"]/tbody/tr'):
 
-            review = tr.xpath('.//div/text()').extract_first()
-
-            small = tr.xpath('.//small//text()').extract()
-
-            chapter = ''.join(small).split('.')[0]
-
-            chapter_number = extract_int(chapter)
-
-            xutime = tr.xpath('.//span/@data-xutime').extract_first()
-
-            print(xutime)
+            yield ReviewHTMLItem(
+                book_id=self.book_id,
+                html=tr.extract(),
+            )
 
         # Continue to next page.
 
