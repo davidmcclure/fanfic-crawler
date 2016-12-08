@@ -25,7 +25,7 @@ class Metadata(Base):
 
     characters = Column(String, nullable=True)
 
-    favs = Column(Integer, nullable=True)
+    favorites = Column(Integer, nullable=True)
 
     follows = Column(Integer, nullable=True)
 
