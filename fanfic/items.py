@@ -2,7 +2,7 @@
 
 from scrapy.item import Item, Field, ItemMeta
 
-from fanfic.models import BookId, Chapter
+from fanfic.models import BookId, Chapter, Metadata
 
 
 class SQLAlchemyItemMeta(ItemMeta):
