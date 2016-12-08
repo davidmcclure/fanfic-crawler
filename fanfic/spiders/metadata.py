@@ -4,7 +4,8 @@ import re
 
 from scrapy import Spider, Request
 
-from fanfic.utils import href_to_id
+from fanfic.utils import href_to_id, parse_metadata
+from fanfic.items import MetadataItem
 
 from .book import BookSpider
 
@@ -52,16 +53,12 @@ class MetadataSpider(BookSpider):
             .extract()
         )
 
-        parts = raw_metadata.split('-')
+        metadata = parse_metadata(raw_metadata)
 
-        metadata = dict([
-            part.split(':')
-            for part in parts
-            if ':' in part
-        ])
-
-        characters = parts[3]
-
-        genres = parts[2]
-
-        print(metadata, genres, characters)
+        yield MetadataItem(
+            title=title,
+            user_id=user_id,
+            username=username,
+            summary=summary,
+            **metadata
+        )

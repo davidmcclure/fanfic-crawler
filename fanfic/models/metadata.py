@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Date
 
 from .base import Base
 
@@ -19,7 +19,9 @@ class Metadata(Base):
 
     summary = Column(String, nullable=True)
 
-    rated = Column(String, nullable=True)
+    rating = Column(String, nullable=True)
+
+    language = Column(String, nullable=True)
 
     genres = Column(String, nullable=True)
 
@@ -29,5 +31,4 @@ class Metadata(Base):
 
     follows = Column(Integer, nullable=True)
 
-    # TODO: Parse date?
-    published = Column(String, nullable=True)
+    published = Column(Date, nullable=True)
