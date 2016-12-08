@@ -32,3 +32,5 @@ class Metadata(Base):
     follows = Column(Integer, nullable=True)
 
     published = Column(Date, nullable=True)
+
+    # TODO: updated

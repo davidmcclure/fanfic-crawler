@@ -2,7 +2,7 @@
 
 from scrapy.item import Item, Field, ItemMeta
 
-from fanfic.models import BookId, Chapter, Metadata, ReviewHTML
+from fanfic.models import BookId, Chapter, MetadataHTML, ReviewHTML
 
 
 class SQLAlchemyItemMeta(ItemMeta):
@@ -44,8 +44,8 @@ class ChapterItem(SQLAlchemyItem):
     model = Chapter
 
 
-class MetadataItem(SQLAlchemyItem):
-    model = Metadata
+class MetadataHTMLItem(SQLAlchemyItem):
+    model = MetadataHTML
 
 
 class ReviewHTMLItem(SQLAlchemyItem):

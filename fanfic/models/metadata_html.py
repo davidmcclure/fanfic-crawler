@@ -5,9 +5,9 @@ from sqlalchemy import Column, Integer, String
 from .base import Base
 
 
-class ReviewHTML(Base):
+class MetadataHTML(Base):
 
-    __tablename__ = 'review_html'
+    __tablename__ = 'metadata_html'
 
     id = Column(Integer, primary_key=True)
 

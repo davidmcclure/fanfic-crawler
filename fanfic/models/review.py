@@ -19,4 +19,4 @@ class Review(Base):
 
     review = Column(String, nullable=True)
 
-    # TODO: date
+    # TODO: published
