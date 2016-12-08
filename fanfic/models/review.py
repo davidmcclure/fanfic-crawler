@@ -18,3 +18,5 @@ class Review(Base):
     chapter_number = Column(Integer, nullable=True)
 
     review = Column(String, nullable=True)
+
+    # TODO: date

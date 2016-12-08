@@ -6,7 +6,7 @@ from dateutil.parser import parse as dateutil_parse
 from datetime import date
 
 
-def href_to_id(href: str) -> int:
+def extract_int(href: str) -> int:
 
     """
     Extract a numeric id from an href.
