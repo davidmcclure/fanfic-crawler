@@ -44,8 +44,17 @@ def parse_metadata(raw: str) -> dict:
         for part in parts if ':' in part
     ])
 
-    characters = clean_string(parts[3])
+    language = clean_string(parts[1])
 
     genres = clean_string(parts[2])
 
-    # TODO
+    characters = clean_string(parts[3])
+
+    return dict(
+        rating      = metadata['Rated'],
+        favorites   = atoi(metadata['Favs']),
+        follows     = atoi(metadata['Follows']),
+        language    = language,
+        genres      = genres,
+        characters  = characters,
+    )
