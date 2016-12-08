@@ -5,7 +5,6 @@ import pytest
 from fanfic.utils import parse_metadata
 
 
-# @pytest.mark.skip
 @pytest.mark.parametrize('raw,parsed', [
 
     (

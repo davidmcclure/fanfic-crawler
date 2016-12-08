@@ -3,4 +3,5 @@ ipython
 scrapy
 psycopg2
 invoke
+python-dateutil
 pytest
