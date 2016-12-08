@@ -42,3 +42,7 @@ class BookIdItem(SQLAlchemyItem):
 
 class ChapterItem(SQLAlchemyItem):
     model = Chapter
+
+
+class MetadataItem(SQLAlchemyItem):
+    model = Metadata
