@@ -1,6 +1,7 @@
 
 ipython
 scrapy
+scrapy-fake-useragent
 psycopg2
 invoke
 python-dateutil

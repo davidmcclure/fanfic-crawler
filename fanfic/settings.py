@@ -96,3 +96,11 @@ DOWNLOAD_DELAY = 3
 ITEM_PIPELINES = {
    'fanfic.pipelines.SQLAlchemyPipeline': 100,
 }
+
+DOWNLOADER_MIDDLEWARES = {
+
+    # Randomize the user agent.
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 100,
+
+}
