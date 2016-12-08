@@ -52,7 +52,7 @@ class MetadataSpider(BookSpider):
             .extract()
         )
 
-        parts = raw_metadata.split('-')
+        parts = map(str.strip, raw_metadata.split('-'))
 
         metadata = dict([
             part.split(':')
@@ -64,4 +64,4 @@ class MetadataSpider(BookSpider):
 
         characters = parts[3]
 
-        print(metadata)
+        print(genres, characters)
