@@ -2,7 +2,7 @@
 
 import pytest
 
-from fanfic.models import MetadataHTML, Metadata
+from fanfic.models import MetadataHTML
 from fanfic.utils import read_yaml
 
 
