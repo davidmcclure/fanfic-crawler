@@ -4,6 +4,7 @@ from sqlalchemy import Column, Integer, String
 from scrapy.selector import Selector
 
 from fanfic.utils import extract_int, parse_metadata
+from fanfic.database import session
 
 from .base import Base
 from .metadata import Metadata
@@ -13,11 +14,26 @@ class MetadataHTML(Base):
 
     __tablename__ = 'metadata_html'
 
+    # TODO: Use book id as PK?
     id = Column(Integer, primary_key=True)
 
     book_id = Column(Integer, nullable=False)
 
     html = Column(String, nullable=False)
+
+    @classmethod
+    def ingest(cls):
+
+        """
+        Load parsed metadata rows.
+        """
+
+        # TODO: Bulk-insert?
+
+        for html_row in cls.query.all():
+            session.add(html_row.parse())
+
+        session.commit()
 
     def parse(self):
 
