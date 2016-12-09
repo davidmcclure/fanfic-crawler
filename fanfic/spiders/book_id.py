@@ -9,9 +9,8 @@ class BookIdSpider(Spider):
 
     name = 'book_id'
 
-    start_urls = [
-        'https://www.fanfiction.net/book/Harry-Potter/?r=10&len=60',
-    ]
+    # Rating: All, >60k words, English
+    start_urls = ['https://www.fanfiction.net/book/Harry-Potter/?&srt=1&lan=1&r=10&len=60' ]
 
     def parse(self, res):
 
