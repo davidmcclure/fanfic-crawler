@@ -9,7 +9,7 @@ from fanfic.utils import read_yaml
 pytestmark = pytest.mark.usefixtures('db')
 
 
-cases = read_yaml(__file__, 'ingest.yml')
+cases = read_yaml(__file__, 'fixtures.yml')
 
 
 @pytest.mark.parametrize('book_id,case', cases.items())
