@@ -6,6 +6,9 @@ from fanfic.models import MetadataHTML, Metadata
 from fanfic.database import session
 
 
+pytestmark = pytest.mark.usefixtures('db')
+
+
 @pytest.mark.skip
 @pytest.mark.parametrize('book_id,html,fields', [
 
