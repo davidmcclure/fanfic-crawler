@@ -9,7 +9,6 @@ from fanfic.database import session
 pytestmark = pytest.mark.usefixtures('db')
 
 
-@pytest.mark.skip
 @pytest.mark.parametrize('book_id,html,fields', [
 
     (
@@ -75,9 +74,7 @@ def test_parse(book_id, html, fields):
 
     MetadataHTML.ingest()
 
-    row = Metadata.query.get(book_id=book_id)
+    row = Metadata.query.filter_by(book_id=book_id).one()
 
-    print(row)
-
-    # for key, val in fields.items():
-        # assert getattr(row, key) == val
+    for key, val in fields.items():
+        assert getattr(row, key) == val
