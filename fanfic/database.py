@@ -4,6 +4,9 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.engine.url import URL
 
+from redis import StrictRedis
+from rq import Queue
+
 
 # TODO: Config-ify.
 
@@ -29,3 +32,8 @@ def begin(conn):
 factory = sessionmaker(engine)
 
 session = scoped_session(factory)
+
+
+# Queue
+
+queue = Queue(connection=StrictRedis())
