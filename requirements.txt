@@ -1,11 +1,14 @@
 
 ipython
+anyconfig
+PyYAML
 psycopg2
 scrapy
 scrapy-fake-useragent
 invoke
 python-dateutil
 pytest
+pytest-env
 rq
 billiard
 click
