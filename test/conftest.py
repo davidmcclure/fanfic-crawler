@@ -24,7 +24,7 @@ def init_testing_db():
 def db():
 
     """
-    Reset the testing database.
+    Wrap tests inside a transaction.
     """
 
     session.begin_nested()
@@ -32,3 +32,8 @@ def db():
     yield
 
     session.remove()
+
+
+@pytest.yield_fixture(scope='module')
+def db_module():
+    yield from db()

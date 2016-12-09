@@ -2,8 +2,11 @@
 
 from invoke import task
 
-from fanfic.database import engine
+from fanfic.database import config
 from fanfic.models import Base
+
+
+engine = config.build_sqla_engine()
 
 
 @task

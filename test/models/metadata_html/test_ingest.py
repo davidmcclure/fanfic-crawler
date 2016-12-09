@@ -7,14 +7,11 @@ from fanfic.models import MetadataHTML, Metadata
 from fanfic.utils import read_yaml
 
 
-pytestmark = pytest.mark.usefixtures('db')
-
-
 cases = read_yaml(__file__, 'fixtures.yml')
 
 
 @pytest.fixture(scope='module', autouse=True)
-def ingest():
+def ingest(db_module):
 
     """
     Write HTML fixtures into the database.
