@@ -2,12 +2,15 @@
 
 import pytest
 
-from fanfic.models import MetadataHTML
+from fanfic.models import MetadataHTML, Metadata
+from fanfic.database import session
 
 
-@pytest.mark.parametrize('html,fields', [
+@pytest.mark.parametrize('book_id,html,fields', [
 
     (
+
+        11472121,
 
         '''
 <div id="profile_top" style="min-height:112px;"><span style="cursor:pointer;" title="Click for Larger Image" onclick="var t = $('#img_large img');t.prop('src',t.attr('data-original'));$('#img_large').modal();"><img class="cimage " style="clear:left;float:left;margin-right:3px;padding:2px;border:1px solid #ccc;-moz-border-radius:2px;-webkit-border-radius:2px;" src="//ffcdn2012t-fictionpressllc.netdna-ssl.com/image/3636437/75/" width="75" height="100"></span><button class="btn pull-right icon-heart" type="button" onclick='$("#follow_area").modal();'> Follow/Fav</button><b class="xcontrast_txt">Whispers in the Dark</b>
@@ -34,6 +37,8 @@ from fanfic.models import MetadataHTML
 
     (
 
+        11379661,
+
         '''
 <div id="profile_top" style="min-height:112px;"><span style="cursor:pointer;" title="Click for Larger Image" onclick="var t = $('#img_large img');t.prop('src',t.attr('data-original'));$('#img_large').modal();"><img class="cimage " style="clear:left;float:left;margin-right:3px;padding:2px;border:1px solid #ccc;-moz-border-radius:2px;-webkit-border-radius:2px;" src="//ffcdn2012t-fictionpressllc.netdna-ssl.com/image/3368187/75/" width="75" height="100"></span><button class="btn pull-right icon-heart" type="button" onclick='$("#follow_area").modal();'> Follow/Fav</button><b class="xcontrast_txt">Time Turned Back</b>
 <span class="xcontrast_txt"><div style="height:5px"></div>By:</span> <a class="xcontrast_txt" href="/u/6892119/TaraSoleil">TaraSoleil</a> <span class="icon-mail-1  xcontrast_txt"></span> <a class="xcontrast_txt" title="Send Private Message" href="https://www.fanfiction.net/pm2/post.php?uid=6892119"></a>
@@ -58,11 +63,17 @@ from fanfic.models import MetadataHTML
     )
 
 ])
-def test_parse(html, fields):
+def test_parse(book_id, html, fields):
 
-    html_row = MetadataHTML(html=html)
+    html_row = MetadataHTML(book_id=book_id, html=html)
 
-    row = html_row.parse()
+    session.add(html_row)
 
-    for key, val in fields.items():
-        assert getattr(row, key) == val
+    MetadataHTML.ingest()
+
+    row = Metadata.query.get(book_id=book_id)
+
+    print(row)
+
+    # for key, val in fields.items():
+        # assert getattr(row, key) == val
