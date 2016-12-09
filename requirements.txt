@@ -1,8 +1,9 @@
 
 ipython
+psycopg2
 scrapy
 scrapy-fake-useragent
-psycopg2
 invoke
 python-dateutil
 pytest
+rq
