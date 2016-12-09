@@ -7,3 +7,4 @@ invoke
 python-dateutil
 pytest
 rq
+billiard
