@@ -3,26 +3,14 @@
 
 import click
 
-from fanfic.models import BookId
-from fanfic.spiders import MetadataSpider
-from fanfic.jobs import crawl
-from fanfic.database import queue
-
-
 @click.group()
 def cli():
     pass
 
 
 @cli.command()
-def crawl_metadata():
-
-    """
-    Queue metadata jobs.
-    """
-
-    for row in BookId.query.all():
-        queue.enqueue(crawl, MetadataSpider, row.book_id)
+def test():
+    print('test')
 
 
 if __name__ == '__main__':
