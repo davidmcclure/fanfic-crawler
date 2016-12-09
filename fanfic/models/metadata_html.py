@@ -14,10 +14,7 @@ class MetadataHTML(Base):
 
     __tablename__ = 'metadata_html'
 
-    # TODO: Use book id as PK?
-    id = Column(Integer, primary_key=True)
-
-    book_id = Column(Integer, nullable=False)
+    book_id = Column(Integer, primary_key=True)
 
     html = Column(String, nullable=False)
 
