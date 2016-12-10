@@ -65,36 +65,3 @@ def parse_date(value: str):
 
     except ValueError:
         return date.today()
-
-
-def parse_metadata(raw: str) -> dict:
-
-    """
-    Parse the metadata string.
-    """
-
-    parts = raw.split('-')
-
-    metadata = dict([
-        [clean_string(p) for p in part.split(':')]
-        for part in parts if ':' in part
-    ])
-
-    language = parts[1]
-
-    genres = parts[2]
-
-    characters = parts[3]
-
-    return dict(
-
-        follows     = atoi(metadata['Follows']),
-        favorites   = atoi(metadata['Favs']),
-        published   = parse_date(metadata['Published']),
-        rating      = metadata['Rated'],
-
-        language    = clean_string(language),
-        genres      = clean_string(genres),
-        characters  = clean_string(characters),
-
-    )

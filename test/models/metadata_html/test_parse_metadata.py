@@ -4,7 +4,7 @@ import pytest
 
 from datetime import date
 
-from fanfic.utils import parse_metadata
+from fanfic.models.metadata_html import parse_metadata
 
 
 @pytest.mark.parametrize('raw,parsed', [
