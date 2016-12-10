@@ -33,4 +33,4 @@ class Metadata(Base):
 
     published = Column(Date, nullable=True)
 
-    # TODO: updated
+    updated = Column(Date, nullable=True)
