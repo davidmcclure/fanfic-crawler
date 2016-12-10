@@ -25,7 +25,7 @@ class ChapterSpider(BookSpider):
             .extract_first()
         )
 
-        content = (
+        chapter = (
             res.selector
             .xpath('//div[@id="storytextp"]')
             .extract_first()
@@ -34,7 +34,7 @@ class ChapterSpider(BookSpider):
         yield ChapterItem(
             book_id=self.book_id,
             chapter_number=chapter_number,
-            content=content,
+            chapter=chapter,
         )
 
         next_onclick = (

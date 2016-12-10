@@ -13,4 +13,4 @@ class Chapter(Base):
 
     chapter_number = Column(Integer, primary_key=True)
 
-    content = Column(String, nullable=False)
+    chapter = Column(String, nullable=False)
