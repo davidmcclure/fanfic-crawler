@@ -11,4 +11,7 @@ pytest
 pytest-env
 rq
 billiard
+cached-property
+bs4
+html5lib
 click
