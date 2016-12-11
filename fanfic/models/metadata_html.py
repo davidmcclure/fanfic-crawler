@@ -7,8 +7,9 @@ from sqlalchemy import Column, Integer, String
 from cached_property import cached_property
 from lxml import html
 
-from fanfic.utils import extract_int, clean_string, atoi, parse_date
 from fanfic.database import session
+from fanfic.utils import extract_int, clean_string, atoi, parse_date
+from fanfic.fields import Fields
 
 from .base import Base
 from .mixins import ScrapyItem
@@ -126,7 +127,7 @@ class MetadataHTML(Base, ScrapyItem):
 
         parts = self.details_string().split('-')
 
-        fields = dict([
+        fields = Fields([
             [clean_string(p) for p in part.split(':')]
             for part in parts if ':' in part
         ])
@@ -138,9 +139,9 @@ class MetadataHTML(Base, ScrapyItem):
         characters = parts[3]
 
         return dict(
-            follows=atoi(fields['Follows']),
-            favorites=atoi(fields['Favs']),
-            rating=fields['Rated'],
+            follows=fields.get('Follows', atoi),
+            favorites=fields.get('Favs', atoi),
+            rating=fields.get('Rated'),
             language=clean_string(language),
             genres=clean_string(genres),
             characters=clean_string(characters),
