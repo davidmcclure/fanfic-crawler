@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String
 from cached_property import cached_property
 from lxml import etree, html
 
-from fanfic.utils import extract_int
+from fanfic.utils import extract_int, clean_string, atoi, parse_date
 
 from .base import Base
 from .mixins import ScrapyItem
@@ -63,7 +63,7 @@ class MetadataHTML(Base, ScrapyItem):
 
         return self.tree.xpath('div/text()')[0]
 
-    def metadata_string(self):
+    def details_string(self):
 
         """
         Query the raw metadata string.
@@ -72,3 +72,35 @@ class MetadataHTML(Base, ScrapyItem):
         parts = self.tree.xpath('span[position()=last()]//text()')
 
         return ''.join(parts)
+
+    def details(self):
+
+        """
+        Parse fields out of the details string.
+        """
+
+        parts = self.details_string().split('-')
+
+        fields = dict([
+            [clean_string(p) for p in part.split(':')]
+            for part in parts if ':' in part
+        ])
+
+        language = parts[1]
+
+        genres = parts[2]
+
+        characters = parts[3]
+
+        return dict(
+
+            follows     = atoi(fields['Follows']),
+            favorites   = atoi(fields['Favs']),
+            published   = parse_date(fields['Published']),
+            rating      = fields['Rated'],
+
+            language    = clean_string(language),
+            genres      = clean_string(genres),
+            characters  = clean_string(characters),
+
+        )
