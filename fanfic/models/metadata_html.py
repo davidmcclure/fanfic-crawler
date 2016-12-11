@@ -97,7 +97,9 @@ class MetadataHTML(Base, ScrapyItem):
 
         xutimes = self.xutimes()
 
-        return dt.fromtimestamp(int(xutimes[1]))
+        offset = 0 if len(xutimes) == 1 else 1
+
+        return dt.fromtimestamp(int(xutimes[offset]))
 
     def updated(self):
 
@@ -107,7 +109,10 @@ class MetadataHTML(Base, ScrapyItem):
 
         xutimes = self.xutimes()
 
-        return dt.fromtimestamp(int(xutimes[0]))
+        return (
+            dt.fromtimestamp(int(xutimes[0]))
+            if len(xutimes) == 2 else None
+        )
 
     def details_string(self):
 

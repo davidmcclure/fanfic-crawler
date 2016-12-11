@@ -58,7 +58,7 @@ pytestmark = pytest.mark.usefixtures('db')
         genres=None,
         characters=None,
         follows=None,
-        favorites=1,
+        favorites=2,
         published=dt.fromtimestamp(970297200),
         updated=None,
     )),
