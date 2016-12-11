@@ -1,14 +1,6 @@
 
 
-from sqlalchemy import (
-    Column,
-    String,
-    Integer,
-    Date,
-    ForeignKey,
-)
-
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Date
 
 from .base import Base
 
@@ -17,11 +9,7 @@ class Metadata(Base):
 
     __tablename__ = 'metadata'
 
-    book_id = Column(
-        Integer,
-        ForeignKey('metadata_html.book_id'),
-        primary_key=True,
-    )
+    book_id = Column(Integer, primary_key=True)
 
     title = Column(String, nullable=True)
 
