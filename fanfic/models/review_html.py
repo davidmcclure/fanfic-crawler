@@ -3,9 +3,10 @@
 from sqlalchemy import Column, Integer, String
 
 from .base import Base
+from .mixins import ScrapedItem
 
 
-class ReviewHTML(Base):
+class ReviewHTML(Base, ScrapedItem):
 
     __tablename__ = 'review_html'
 

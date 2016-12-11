@@ -3,9 +3,10 @@
 from sqlalchemy import Column, Integer, String
 
 from .base import Base
+from .mixins import ScrapedItem
 
 
-class MetadataHTML(Base):
+class MetadataHTML(Base, ScrapedItem):
 
     __tablename__ = 'metadata_html'
 

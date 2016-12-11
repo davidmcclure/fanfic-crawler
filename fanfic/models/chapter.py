@@ -3,9 +3,10 @@
 from sqlalchemy import Column, Integer, String
 
 from .base import Base
+from .mixins import ScrapedItem
 
 
-class Chapter(Base):
+class Chapter(Base, ScrapedItem):
 
     __tablename__ = 'chapter'
 
