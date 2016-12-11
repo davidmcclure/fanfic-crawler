@@ -47,6 +47,22 @@ pytestmark = pytest.mark.usefixtures('db')
         updated=dt.fromtimestamp(1481386185),
     )),
 
+    (83174, dict(
+        book_id=83174,
+        title='Violet\'s Story',
+        user_id=20430,
+        username='Moondust',
+        summary="Hey everyone! This my first fic and I would like to know how you all like it, so please read and review. Thanks!",
+        rating='Fiction K+',
+        language='English',
+        genres=None,
+        characters=None,
+        follows=None,
+        favorites=1,
+        published=dt.fromtimestamp(970297200),
+        updated=None,
+    )),
+
 ])
 def test_ingest(book_id, fields):
 
