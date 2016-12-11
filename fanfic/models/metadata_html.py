@@ -9,7 +9,6 @@ from lxml import html
 
 from fanfic.database import session
 from fanfic.utils import extract_int, clean_string, atoi
-from fanfic.parse_dict import ParseDict
 
 from .base import Base
 from .mixins import ScrapyItem
