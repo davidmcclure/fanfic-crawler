@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String, DateTime
 
 from .base import Base
 
@@ -31,6 +31,6 @@ class Metadata(Base):
 
     follows = Column(Integer, nullable=True)
 
-    published = Column(Date, nullable=True)
+    published = Column(DateTime, nullable=True)
 
-    updated = Column(Date, nullable=True)
+    updated = Column(DateTime, nullable=True)

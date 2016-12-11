@@ -1,6 +1,9 @@
 
 
+from datetime import datetime as dt
+
 from sqlalchemy import Column, Integer, String
+
 from cached_property import cached_property
 from lxml import html
 
@@ -77,6 +80,34 @@ class MetadataHTML(Base, ScrapyItem):
 
         return self.tree.xpath('div/text()')[0]
 
+    def xutimes(self):
+
+        """
+        Query data-xutime timestamps.
+        """
+
+        return self.tree.xpath('//*[@data-xutime]/@data-xutime')
+
+    def published(self):
+
+        """
+        Query the published timestamp.
+        """
+
+        xutimes = self.xutimes()
+
+        return dt.fromtimestamp(int(xutimes[1]))
+
+    def updated(self):
+
+        """
+        Query the published timestamp.
+        """
+
+        xutimes = self.xutimes()
+
+        return dt.fromtimestamp(int(xutimes[0]))
+
     def details_string(self):
 
         """
@@ -109,7 +140,6 @@ class MetadataHTML(Base, ScrapyItem):
         return dict(
             follows=atoi(fields['Follows']),
             favorites=atoi(fields['Favs']),
-            published=parse_date(fields['Published']),
             rating=fields['Rated'],
             language=clean_string(language),
             genres=clean_string(genres),
@@ -132,5 +162,7 @@ class MetadataHTML(Base, ScrapyItem):
             user_id=self.user_id(),
             username=self.username(),
             summary=self.summary(),
+            published=self.published(),
+            updated=self.updated(),
             **details
         )
