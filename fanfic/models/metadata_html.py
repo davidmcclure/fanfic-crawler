@@ -8,6 +8,7 @@ from fanfic.utils import extract_int, clean_string, atoi, parse_date
 
 from .base import Base
 from .mixins import ScrapyItem
+from .metadata import Metadata
 
 
 class MetadataHTML(Base, ScrapyItem):
@@ -102,5 +103,27 @@ class MetadataHTML(Base, ScrapyItem):
             language    = clean_string(language),
             genres      = clean_string(genres),
             characters  = clean_string(characters),
+
+        )
+
+    def parse(self):
+
+        """
+        Map into the Metadata model.
+
+        Returns: Metadata
+        """
+
+        details = self.details()
+
+        return Metadata(
+
+            book_id     = self.book_id,
+            title       = self.title(),
+            user_id     = self.user_id(),
+            username    = self.username(),
+            summary     = self.summary(),
+
+            **details
 
         )
