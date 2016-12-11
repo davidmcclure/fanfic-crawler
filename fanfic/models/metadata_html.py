@@ -144,8 +144,8 @@ class MetadataHTML(Base, ScrapyItem):
         characters = parts[3]
 
         return dict(
-            follows=fields.get('Follows', atoi),
-            favorites=fields.get('Favs', atoi),
+            follows=fields.parse('Follows', atoi),
+            favorites=fields.parse('Favs', atoi),
             rating=fields.get('Rated'),
             language=clean_string(language),
             genres=clean_string(genres),

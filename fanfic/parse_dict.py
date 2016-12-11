@@ -2,7 +2,7 @@
 
 class ParseDict(dict):
 
-    def get(self, key, parse=None, default=None):
+    def parse(self, key, parse=None, default=None):
 
         """
         Look up a key. If a parse function is provided, apply it. If the key
