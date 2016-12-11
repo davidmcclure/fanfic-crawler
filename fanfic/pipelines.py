@@ -1,7 +1,6 @@
 
 
 from fanfic.database import session
-from fanfic.models import BookId
 
 
 class SQLAlchemyPipeline(object):

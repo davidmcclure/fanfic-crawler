@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, Integer, String
 from cached_property import cached_property
-from lxml import etree, html
+from lxml import html
 
 from fanfic.utils import extract_int, clean_string, atoi, parse_date
 
@@ -94,16 +94,13 @@ class MetadataHTML(Base, ScrapyItem):
         characters = parts[3]
 
         return dict(
-
-            follows     = atoi(fields['Follows']),
-            favorites   = atoi(fields['Favs']),
-            published   = parse_date(fields['Published']),
-            rating      = fields['Rated'],
-
-            language    = clean_string(language),
-            genres      = clean_string(genres),
-            characters  = clean_string(characters),
-
+            follows=atoi(fields['Follows']),
+            favorites=atoi(fields['Favs']),
+            published=parse_date(fields['Published']),
+            rating=fields['Rated'],
+            language=clean_string(language),
+            genres=clean_string(genres),
+            characters=clean_string(characters),
         )
 
     def parse(self):
@@ -117,13 +114,10 @@ class MetadataHTML(Base, ScrapyItem):
         details = self.details()
 
         return Metadata(
-
-            book_id     = self.book_id,
-            title       = self.title(),
-            user_id     = self.user_id(),
-            username    = self.username(),
-            summary     = self.summary(),
-
+            book_id=self.book_id,
+            title=self.title(),
+            user_id=self.user_id(),
+            username=self.username(),
+            summary=self.summary(),
             **details
-
         )

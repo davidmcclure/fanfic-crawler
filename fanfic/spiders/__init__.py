@@ -1,3 +1,0 @@
-
-
-from .metadata import MetadataSpider

@@ -1,7 +1,6 @@
 
 
 import pytest
-import os
 
 from fanfic.database import config as _config, session
 from fanfic.models import Base
