@@ -47,6 +47,7 @@ pytestmark = pytest.mark.usefixtures('db')
         updated=dt.fromtimestamp(1481386185),
     )),
 
+    # No genres, no characters.
     (83174, dict(
         book_id=83174,
         title='Violet\'s Story',

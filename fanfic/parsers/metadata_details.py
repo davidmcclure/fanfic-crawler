@@ -77,7 +77,10 @@ class MetadataDetailsParser(OrderedDict):
         TODO
         """
 
-        return list(self.keys())[2]
+        keys = list(self.keys())
+
+        if keys[4] == 'Chapters':
+            return list(self.keys())[2]
 
     def characters(self) -> str:
 
@@ -85,4 +88,7 @@ class MetadataDetailsParser(OrderedDict):
         TODO
         """
 
-        return list(self.keys())[3]
+        keys = list(self.keys())
+
+        if keys[4] == 'Chapters':
+            return list(self.keys())[3]
