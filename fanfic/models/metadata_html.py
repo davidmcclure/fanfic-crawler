@@ -1,14 +1,14 @@
 
 
 from datetime import datetime as dt
-
-from sqlalchemy import Column, Integer, String
+from collections import OrderedDict
 
 from cached_property import cached_property
+from sqlalchemy import Column, Integer, String
 from lxml import html
 
 from fanfic.database import session
-from fanfic.utils import extract_int, clean_string, atoi, parse_date
+from fanfic.utils import extract_int, clean_string, atoi
 from fanfic.parse_dict import ParseDict
 
 from .base import Base
@@ -97,6 +97,9 @@ class MetadataHTML(Base, ScrapyItem):
 
         xutimes = self.xutimes()
 
+        # If there are 2 xutimes, published is the second. Otherwise, it is the
+        # first and only xutime.
+
         offset = 0 if len(xutimes) == 1 else 1
 
         return dt.fromtimestamp(int(xutimes[offset]))
@@ -104,10 +107,13 @@ class MetadataHTML(Base, ScrapyItem):
     def updated(self):
 
         """
-        Query the published timestamp.
+        Query the updated timestamp.
         """
 
         xutimes = self.xutimes()
+
+        # If there are 2 xutimes, updated is the first. Otherwise, there is no
+        # updated date, just published.
 
         return (
             dt.fromtimestamp(int(xutimes[0]))
@@ -130,26 +136,15 @@ class MetadataHTML(Base, ScrapyItem):
         Parse fields out of the details string.
         """
 
-        parts = self.details_string().split('-')
-
-        fields = ParseDict([
-            [clean_string(p) for p in part.split(':')]
-            for part in parts if ':' in part
-        ])
-
-        language = parts[1]
-
-        genres = parts[2]
-
-        characters = parts[3]
+        details = DetailsString(self.details_string())
 
         return dict(
-            follows=fields.parse('Follows', atoi),
-            favorites=fields.parse('Favs', atoi),
-            rating=fields.get('Rated'),
-            language=clean_string(language),
-            genres=clean_string(genres),
-            characters=clean_string(characters),
+            follows=details.follows(),
+            favorites=details.favorites(),
+            rating=details.rating(),
+            language=details.language(),
+            genres=details.genres(),
+            characters=details.characters(),
         )
 
     def parse(self):
@@ -172,3 +167,86 @@ class MetadataHTML(Base, ScrapyItem):
             updated=self.updated(),
             **details
         )
+
+
+class DetailsString(OrderedDict):
+
+    def __init__(self, raw):
+
+        """
+        Parse the raw details string.
+        """
+
+        parts = raw.split('-')
+
+        for part in parts:
+
+            if ':' in part:
+                key, val = part.split(':')
+                self[clean_string(key)] = clean_string(val)
+
+            else:
+                self[clean_string(part)] = None
+
+    def parse_key(self, key, parse=None, default=None):
+
+        """
+        Look up a key. If a parse function is provided, apply it. If the key
+        is missing, return the default.
+        """
+
+        val = self.get(key)
+
+        if val:
+            return parse(val) if parse else val
+
+        else:
+            return default
+
+    def follows(self) -> int:
+
+        """
+        Cast 'Follows' to an integer.
+        """
+
+        return self.parse_key('Follows', atoi)
+
+    def favorites(self) -> int:
+
+        """
+        Cast 'Favs' to an integer.
+        """
+
+        return self.parse_key('Favs', atoi)
+
+    def rating(self) -> str:
+
+        """
+        Provide 'Rated' as-is.
+        """
+
+        return self.get('Rated')
+
+    def language(self) -> str:
+
+        """
+        Language is always the second element.
+        """
+
+        return list(self.keys())[1]
+
+    def genres(self) -> str:
+
+        """
+        TODO
+        """
+
+        return list(self.keys())[2]
+
+    def characters(self) -> str:
+
+        """
+        TODO
+        """
+
+        return list(self.keys())[3]
