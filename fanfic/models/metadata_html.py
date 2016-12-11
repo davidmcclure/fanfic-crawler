@@ -1,14 +1,14 @@
 
 
 from datetime import datetime as dt
-from collections import OrderedDict
 
 from cached_property import cached_property
 from sqlalchemy import Column, Integer, String
 from lxml import html
 
 from fanfic.database import session
-from fanfic.utils import extract_int, clean_string, atoi
+from fanfic.parsers import MetadataDetailsParser
+from fanfic.utils import extract_int
 
 from .base import Base
 from .mixins import ScrapyItem
@@ -135,7 +135,7 @@ class MetadataHTML(Base, ScrapyItem):
         Parse fields out of the details string.
         """
 
-        details = DetailsString(self.details_string())
+        details = MetadataDetailsParser(self.details_string())
 
         return dict(
             follows=details.follows(),
@@ -166,86 +166,3 @@ class MetadataHTML(Base, ScrapyItem):
             updated=self.updated(),
             **details
         )
-
-
-class DetailsString(OrderedDict):
-
-    def __init__(self, raw):
-
-        """
-        Parse the raw details string.
-        """
-
-        parts = raw.split('-')
-
-        for part in parts:
-
-            if ':' in part:
-                key, val = part.split(':')
-                self[clean_string(key)] = clean_string(val)
-
-            else:
-                self[clean_string(part)] = None
-
-    def parse_key(self, key, parse=None, default=None):
-
-        """
-        Look up a key. If a parse function is provided, apply it. If the key
-        is missing, return the default.
-        """
-
-        val = self.get(key)
-
-        if val:
-            return parse(val) if parse else val
-
-        else:
-            return default
-
-    def follows(self) -> int:
-
-        """
-        Cast 'Follows' to an integer.
-        """
-
-        return self.parse_key('Follows', atoi)
-
-    def favorites(self) -> int:
-
-        """
-        Cast 'Favs' to an integer.
-        """
-
-        return self.parse_key('Favs', atoi)
-
-    def rating(self) -> str:
-
-        """
-        Provide 'Rated' as-is.
-        """
-
-        return self.get('Rated')
-
-    def language(self) -> str:
-
-        """
-        Language is always the second element.
-        """
-
-        return list(self.keys())[1]
-
-    def genres(self) -> str:
-
-        """
-        TODO
-        """
-
-        return list(self.keys())[2]
-
-    def characters(self) -> str:
-
-        """
-        TODO
-        """
-
-        return list(self.keys())[3]
