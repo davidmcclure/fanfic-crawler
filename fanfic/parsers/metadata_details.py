@@ -1,6 +1,7 @@
 
 
 from collections import OrderedDict
+from textblob import TextBlob
 
 from fanfic.utils import clean_string, atoi
 
@@ -74,7 +75,7 @@ class MetadataDetailsParser(OrderedDict):
     def genres(self) -> str:
 
         """
-        TODO
+        Try to find a genres list.
         """
 
         keys = list(self.keys())
@@ -82,13 +83,31 @@ class MetadataDetailsParser(OrderedDict):
         if keys[4] == 'Chapters':
             return list(self.keys())[2]
 
+        elif keys[3] == 'Chapters':
+
+            blob = TextBlob(keys[2])
+
+            tags = [pos for token, pos in blob.tags]
+
+            if 'NNP' not in tags:
+                return keys[2]
+
     def characters(self) -> str:
 
         """
-        TODO
+        Try to find a characters list.
         """
 
         keys = list(self.keys())
 
         if keys[4] == 'Chapters':
             return list(self.keys())[3]
+
+        elif keys[3] == 'Chapters':
+
+            blob = TextBlob(keys[2])
+
+            tags = [pos for token, pos in blob.tags]
+
+            if 'NNP' in tags:
+                return keys[2]

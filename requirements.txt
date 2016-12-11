@@ -15,4 +15,5 @@ cached-property
 bs4
 html5lib
 click
+textblob
 flake8
