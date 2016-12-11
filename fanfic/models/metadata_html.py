@@ -5,6 +5,7 @@ from cached_property import cached_property
 from lxml import html
 
 from fanfic.utils import extract_int, clean_string, atoi, parse_date
+from fanfic.database import session
 
 from .base import Base
 from .mixins import ScrapyItem
@@ -18,6 +19,18 @@ class MetadataHTML(Base, ScrapyItem):
     book_id = Column(Integer, primary_key=True)
 
     html = Column(String, nullable=False)
+
+    @classmethod
+    def ingest(cls):
+
+        """
+        Parse HTML, load rows into Metadata.
+        """
+
+        for html in cls.query.all():
+            session.add(html.parse())
+
+        session.commit()
 
     @cached_property
     def tree(self):
