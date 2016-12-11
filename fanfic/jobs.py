@@ -5,8 +5,6 @@ from scrapy.utils.project import get_project_settings
 from billiard import Process
 from twisted.internet import reactor
 
-from fanfic.spiders.metadata import MetadataSpider
-
 
 class CrawlerSubprocess(Process):
 

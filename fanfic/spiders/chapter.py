@@ -2,7 +2,7 @@
 
 import re
 
-from scrapy import Spider, Request
+from scrapy import Request
 
 from fanfic.items import ChapterItem
 

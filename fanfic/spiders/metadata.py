@@ -1,9 +1,5 @@
 
 
-import re
-
-from scrapy import Spider, Request
-
 from fanfic.items import MetadataHTMLItem
 
 from .book import BookSpider
