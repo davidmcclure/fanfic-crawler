@@ -1,8 +1,46 @@
 
 
+from nltk.tokenize import RegexpTokenizer
 from collections import OrderedDict
 
-from fanfic.utils import clean_string, atoi, pos_tags
+from fanfic.utils import clean_string, atoi
+
+
+GENRES = set([
+    'Adventure',
+    'Angst',
+    'Crime',
+    'Drama',
+    'Family',
+    'Fantasy',
+    'Friendship',
+    'General',
+    'Horror',
+    'Humor',
+    'Hurt',
+    'Comfort',
+    'Mystery',
+    'Parody',
+    'Poetry',
+    'Romance',
+    'Sci-Fi',
+    'Spiritual',
+    'Supernatural',
+    'Suspense',
+    'Tragedy',
+    'Western',
+])
+
+
+def is_genre(text: str) -> bool:
+
+    """
+    Check if a string contains any of the genre words.
+    """
+
+    tokens = RegexpTokenizer('[a-zA-Z]+').tokenize(text)
+
+    return bool(set(tokens).intersection(GENRES))
 
 
 class MetadataDetailsParser(OrderedDict):
@@ -82,7 +120,7 @@ class MetadataDetailsParser(OrderedDict):
         if keys[4] == 'Chapters':
             return list(self.keys())[2]
 
-        elif keys[3] == 'Chapters' and 'NNP' not in pos_tags(keys[2]):
+        elif keys[3] == 'Chapters' and is_genre(keys[2]):
             return keys[2]
 
     def characters(self) -> str:
@@ -96,5 +134,5 @@ class MetadataDetailsParser(OrderedDict):
         if keys[4] == 'Chapters':
             return list(self.keys())[3]
 
-        elif keys[3] == 'Chapters' and 'NNP' in pos_tags(keys[2]):
+        elif keys[3] == 'Chapters' and not is_genre(keys[2]):
             return keys[2]

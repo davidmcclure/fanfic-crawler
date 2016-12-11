@@ -2,8 +2,6 @@
 
 import re
 
-from textblob import TextBlob
-
 
 def extract_int(href: str) -> int:
 
@@ -31,14 +29,3 @@ def atoi(value: str) -> int:
     """
 
     return int(value.replace(',', ''))
-
-
-def pos_tags(text: str) -> list:
-
-    """
-    Return a list of POS tags from a text.
-    """
-
-    blob = TextBlob(text)
-
-    return [pos for _, pos in blob.tags]
