@@ -10,6 +10,9 @@ from fanfic.database import session
 from test.utils import get_fixture
 
 
+pytestmark = pytest.mark.usefixtures('db')
+
+
 @pytest.mark.parametrize('book_id,fields', [
 
     (12241223, dict(
@@ -26,6 +29,22 @@ from test.utils import get_fixture
         favorites=22,
         published=dt.fromtimestamp(1479684054),
         updated=dt.fromtimestamp(1481476219),
+    )),
+
+    (11931564, dict(
+        book_id=11931564,
+        title='The Red Dragon',
+        user_id=5439553,
+        username='Yes I am using a typewriter',
+        summary="The time turner around Harrys neck shattered sending his soul back in time; where his body could not go. When Harry finds himself in a ten year old body; in his aunts garden he vows to do things right this time and save everyone he lost. First he needs to make his friends into the new Marauders and convince the sorting hat to unite him with his own alternative to Sirius Black.",
+        rating='Fiction T',
+        language='English',
+        genres='Adventure/Friendship',
+        characters='Harry P., Ron W., Hermione G., Draco M.',
+        follows=1777,
+        favorites=1068,
+        published=dt.fromtimestamp(1462477100),
+        updated=dt.fromtimestamp(1481386185),
     )),
 
 ])
