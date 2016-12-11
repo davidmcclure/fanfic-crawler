@@ -9,7 +9,7 @@ from lxml import html
 
 from fanfic.database import session
 from fanfic.utils import extract_int, clean_string, atoi, parse_date
-from fanfic.fields import Fields
+from fanfic.parse_dict import ParseDict
 
 from .base import Base
 from .mixins import ScrapyItem
@@ -127,7 +127,7 @@ class MetadataHTML(Base, ScrapyItem):
 
         parts = self.details_string().split('-')
 
-        fields = Fields([
+        fields = ParseDict([
             [clean_string(p) for p in part.split(':')]
             for part in parts if ':' in part
         ])

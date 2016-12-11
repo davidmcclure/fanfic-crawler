@@ -1,6 +1,6 @@
 
 
-class Fields(dict):
+class ParseDict(dict):
 
     def get(self, key, parse=None, default=None):
 
