@@ -2,8 +2,7 @@
 
 import re
 
-from dateutil.parser import parse as dateutil_parse
-from datetime import date
+from textblob import TextBlob
 
 
 def extract_int(href: str) -> int:
@@ -34,14 +33,12 @@ def atoi(value: str) -> int:
     return int(value.replace(',', ''))
 
 
-def parse_date(value: str):
+def pos_tags(text: str) -> list:
 
     """
-    Try to parse a date string. On failure, return today.
+    Return a list of POS tags from a text.
     """
 
-    try:
-        return dateutil_parse(value).date()
+    blob = TextBlob(text)
 
-    except ValueError:
-        return date.today()
+    return [pos for _, pos in blob.tags]
