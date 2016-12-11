@@ -64,6 +64,23 @@ pytestmark = pytest.mark.usefixtures('db')
         updated=None,
     )),
 
+    # Genres, no characters.
+    (248475, dict(
+        book_id=248475,
+        title='Apple Pie and Enchiladas',
+        user_id=8669,
+        username='gaelicchick',
+        summary="Dark forces and flying drumsticks, talking birds, talking mirrors, bigotry, love, and a quest to save the last remnant of a vanishing people. Fifth year, Sirius and Remus cameos and a tiny hint of R/Hermione*FINAL CHAPTER*",  # noqa: E501
+        rating='Fiction T',
+        language='English',
+        genres='Drama',
+        characters=None,
+        follows=1,
+        favorites=13,
+        published=dt.fromtimestamp(986713200),
+        updated=dt.fromtimestamp(1012858887),
+    )),
+
 ])
 def test_ingest(book_id, fields):
 
