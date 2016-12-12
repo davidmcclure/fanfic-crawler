@@ -28,13 +28,13 @@ class ProfileSpider(BookSpider):
             html=profile,
         )
 
-    def close(self, reason):
+    def closed(self, *args, **kwargs):
 
         """
         Pause before closing, to throttle requests when the spider is run
         serially by a job queue.
         """
 
-        super().close()
+        super().closed(*args, **kwargs)
 
         time.sleep(self.settings['DOWNLOAD_DELAY'])

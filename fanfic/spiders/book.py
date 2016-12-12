@@ -25,7 +25,7 @@ class BookSpider(Spider):
 
         self.book_id = book_id
 
-    def close(self, reason):
+    def closed(self, reason):
 
         """
         Flush items to disk when the crawl finishes.

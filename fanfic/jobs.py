@@ -20,7 +20,7 @@ def crawl(spider: str, book_id: int):
     proc.start()
 
 
-@job('profile', connection=redis, timeout=3600)
+@job('profiles', connection=redis, timeout=3600)
 def crawl_profile(book_id: int):
     crawl('profile', book_id)
 
