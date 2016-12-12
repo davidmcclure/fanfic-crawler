@@ -3,7 +3,7 @@
 from datetime import datetime as dt
 
 from cached_property import cached_property
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from lxml import html
 
 from fanfic.services import session
@@ -18,7 +18,11 @@ class ReviewHTML(Base, ScrapyItem):
 
     __tablename__ = 'review_html'
 
-    book_id = Column(Integer, nullable=False)
+    book_id = Column(
+        ForeignKey('book_id.book_id'),
+        primary_key=True,
+        autoincrement=False,
+    )
 
     review_id = Column(Integer, primary_key=True, autoincrement=False)
 

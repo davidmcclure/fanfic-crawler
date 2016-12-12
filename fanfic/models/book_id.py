@@ -16,6 +16,8 @@ class BookId(Base):
 
     metadata_html = relationship('MetadataHTML')
 
+    reviews = relationship('ReviewHTML')
+
     @classmethod
     def ids(cls):
 
@@ -50,6 +52,21 @@ class BookId(Base):
         query = (
             cls.query
             .filter(cls.metadata_html == None)  # noqa: E711
+            .all()
+        )
+
+        return [row.book_id for row in query]
+
+    @classmethod
+    def without_reviews(cls):
+
+        """
+        Get book ids without any downloaded reviews.
+        """
+
+        query = (
+            cls.query
+            .filter(cls.reviews == None)  # noqa: E711
             .all()
         )
 

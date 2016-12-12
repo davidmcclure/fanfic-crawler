@@ -14,7 +14,7 @@ def cli():
 
 @cli.command()
 def queue_metadata():
-    for book_id in BookId.ids():
+    for book_id in BookId.without_metadata_html():
         crawl_metadata.delay(book_id)
 
 
