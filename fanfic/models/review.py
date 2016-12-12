@@ -17,9 +17,9 @@ class Review(Base):
 
     __tablename__ = 'review'
 
-    review_id = Column(Integer, primary_key=True)
-
     book_id = Column(Integer, nullable=False)
+
+    review_id = Column(Integer, primary_key=True)
 
     user_id = Column(Integer, nullable=True)
 

@@ -13,6 +13,7 @@ from fanfic.utils import clean_string, extract_int
 
 from .base import Base
 from .mixins import ScrapyItem
+from .review import Review
 
 
 class ReviewHTML(Base, ScrapyItem):
@@ -115,3 +116,21 @@ class ReviewHTML(Base, ScrapyItem):
         small = self.tree.xpath('td/small/text()')[0]
 
         return extract_int(small.split('.')[0])
+
+    def parse(self):
+
+        """
+        Map into the Metadata model.
+
+        Returns: Metadata
+        """
+
+        return Review(
+            book_id=self.book_id,
+            review_id=self.review_id(),
+            user_id=self.user_id(),
+            username=self.username(),
+            chapter_number=self.chapter_number(),
+            review=self.review(),
+            published=self.published(),
+        )

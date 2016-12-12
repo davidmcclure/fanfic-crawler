@@ -27,7 +27,6 @@ def ingest(db_module):
     MetadataHTML.ingest()
 
 
-# TODO: Ingest once, check all rows?
 @pytest.mark.parametrize('book_id,fields', [
 
     (12241223, dict(
