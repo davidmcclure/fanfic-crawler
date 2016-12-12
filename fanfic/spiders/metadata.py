@@ -28,7 +28,7 @@ class MetadataSpider(BookSpider):
             html=metadata,
         )
 
-    def close(self):
+    def closed(self):
 
         """
         Pause before closing, to throttle requests when the spider is run

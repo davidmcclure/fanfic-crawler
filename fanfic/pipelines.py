@@ -12,6 +12,12 @@ class SQLAlchemyPipeline(object):
         """
 
         session.add(item.row())
-        session.commit()
-
         return item
+
+    def close_spider(self, spider):
+
+        """
+        Commit the session when the crawl finishes.
+        """
+
+        session.commit()

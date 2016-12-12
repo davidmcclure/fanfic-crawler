@@ -2,6 +2,8 @@
 
 from scrapy import Spider
 
+from fanfic.services import session
+
 
 class BookSpider(Spider):
 
