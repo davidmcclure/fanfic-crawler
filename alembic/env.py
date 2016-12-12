@@ -14,7 +14,10 @@ from fanfic.models import Base
 config = context.config
 
 # Inject the config-managed URL.
-config.set_main_option('sqlalchemy.url', str(fanfic_config.build_sqla_url()))
+config.set_main_option(
+    'sqlalchemy.url',
+    str(fanfic_config.build_sqla_url()),
+)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
