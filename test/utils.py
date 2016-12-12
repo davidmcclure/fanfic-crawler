@@ -16,3 +16,7 @@ def read_metadata_fixture(book_id: int):
 
     with open(path) as fh:
         return fh.read()
+
+
+def read_review_fixture(book_id: int, review_id: int):
+    pass

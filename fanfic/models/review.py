@@ -19,11 +19,7 @@ class Review(Base):
 
     id = Column(Integer, primary_key=True)
 
-    html_id = Column(
-        Integer,
-        ForeignKey('review_html.id'),
-        nullable=False,
-    )
+    html_id = Column(Integer, ForeignKey('review_html.id'), nullable=False)
 
     html = relationship('ReviewHTML')
 

@@ -13,6 +13,7 @@ from test.utils import read_metadata_fixture
 pytestmark = pytest.mark.usefixtures('db')
 
 
+# TODO: Ingest once, check all rows?
 @pytest.mark.parametrize('book_id,fields', [
 
     (12241223, dict(
