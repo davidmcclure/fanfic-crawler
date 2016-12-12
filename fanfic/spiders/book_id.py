@@ -3,6 +3,7 @@
 from scrapy import Spider, Request
 
 from fanfic.items import BookIdItem
+from fanfic.services import session
 
 
 class BookIdSpider(Spider):
@@ -40,3 +41,7 @@ class BookIdSpider(Spider):
         next_url = res.urljoin(next_href)
 
         yield Request(next_url)
+
+        # Flush book ids en-route.
+
+        session.commit()

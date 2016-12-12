@@ -2,6 +2,8 @@
 
 from scrapy import Spider
 
+from fanfic.services import session
+
 
 class BookSpider(Spider):
 
@@ -22,3 +24,12 @@ class BookSpider(Spider):
         self.start_urls = [url]
 
         self.book_id = book_id
+
+    def close(self, reason):
+
+        """
+        Flush items to disk when the crawl finishes.
+        """
+
+        if reason == 'finished':
+            session.commit()

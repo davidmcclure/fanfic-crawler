@@ -28,11 +28,13 @@ class MetadataSpider(BookSpider):
             html=metadata,
         )
 
-    def closed(self, reason):
+    def close(self, reason):
 
         """
         Pause before closing, to throttle requests when the spider is run
         serially by a job queue.
         """
+
+        super().close()
 
         time.sleep(self.settings['DOWNLOAD_DELAY'])
