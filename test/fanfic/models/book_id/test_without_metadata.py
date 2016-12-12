@@ -22,4 +22,4 @@ def test_without_chapters():
 
     # No metadata for ids 3 and 4.
 
-    assert BookId.without_metadata_html() == [3, 4]
+    assert BookId.without_metadata() == [3, 4]

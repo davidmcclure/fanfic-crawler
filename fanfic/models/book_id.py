@@ -43,7 +43,7 @@ class BookId(Base):
         return [row.book_id for row in query]
 
     @classmethod
-    def without_metadata_html(cls):
+    def without_metadata(cls):
 
         """
         Get book ids without downloaded metadata.
