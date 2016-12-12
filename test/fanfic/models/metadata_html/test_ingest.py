@@ -81,6 +81,23 @@ pytestmark = pytest.mark.usefixtures('db')
         updated=dt.fromtimestamp(1012858887),
     )),
 
+    # Characters, no genres.
+    (12026134, dict(
+        book_id=12026134,
+        title='Harry Potter and the ? (Goblet of Fire)',
+        user_id=2720740,
+        username='bookhater95',
+        summary="Though the worst has been revealed, now that Harry has Sirius on his side they're all confident Harry's next year must go smoothly...right? Part of my Reading the ? book's series. Status: In Progress",  # noqa: E501
+        rating='Fiction T',
+        language='English',
+        genres=None,
+        characters='Sirius B., Remus L., James P., Lily Evans P.',
+        follows=306,
+        favorites=225,
+        published=dt.fromtimestamp(1467313627),
+        updated=dt.fromtimestamp(1481476222),
+    )),
+
 ])
 def test_ingest(book_id, fields):
 
