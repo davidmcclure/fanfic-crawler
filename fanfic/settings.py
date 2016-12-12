@@ -94,6 +94,8 @@ NEWSPIDER_MODULE = 'fanfic.spiders'
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
+LOG_LEVEL = 'WARNING'
+
 ROBOTSTXT_OBEY = False
 
 DOWNLOAD_DELAY = 3
