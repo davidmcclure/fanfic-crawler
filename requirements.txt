@@ -9,6 +9,7 @@ invoke
 python-dateutil
 pytest
 pytest-env
+factory_boy
 rq
 billiard
 cached-property

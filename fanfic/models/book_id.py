@@ -20,6 +20,7 @@ class BookId(Base):
 
         return [r.book_id for r in cls.query.all()]
 
+    @classmethod
     def without_chapters(cls) -> list:
 
         """
