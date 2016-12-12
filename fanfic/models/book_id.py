@@ -16,7 +16,7 @@ class BookId(Base):
 
     metadata_html = relationship('MetadataHTML')
 
-    reviews = relationship('ReviewHTML')
+    reviews_html = relationship('ReviewHTML')
 
     @classmethod
     def ids(cls):
@@ -66,7 +66,7 @@ class BookId(Base):
 
         query = (
             cls.query
-            .filter(cls.reviews == None)  # noqa: E711
+            .filter(cls.reviews_html == None)  # noqa: E711
             .all()
         )
 
