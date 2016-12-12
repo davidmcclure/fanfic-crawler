@@ -1,7 +1,5 @@
 
 
-import re
-
 from datetime import datetime as dt
 
 from cached_property import cached_property

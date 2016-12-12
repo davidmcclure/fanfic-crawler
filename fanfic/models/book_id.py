@@ -19,3 +19,11 @@ class BookId(Base):
         """
 
         return [r.book_id for r in cls.query.all()]
+
+    def without_chapters(cls) -> list:
+
+        """
+        Get book IDs without downloaded chapters.
+        """
+
+        pass
