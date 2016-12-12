@@ -1,4 +1,4 @@
 
 # flake8: noqa
 
-from .metadata_details import MetadataDetailsParser
+from .profile_details import ProfileDetailsParser

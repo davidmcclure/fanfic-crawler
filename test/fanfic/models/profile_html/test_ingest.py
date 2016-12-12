@@ -4,7 +4,7 @@ import pytest
 
 from datetime import datetime as dt
 
-from fanfic.models import MetadataHTML, Metadata
+from fanfic.models import ProfileHTML, Profile
 from fanfic.services import session
 
 from test.utils import read_yaml
@@ -21,10 +21,10 @@ def ingest(db_module):
     """
 
     for book_id, html in cases.items():
-        row = MetadataHTML(book_id=book_id, html=html)
+        row = ProfileHTML(book_id=book_id, html=html)
         session.add(row)
 
-    MetadataHTML.ingest()
+    ProfileHTML.ingest()
 
 
 @pytest.mark.parametrize('book_id,fields', [
@@ -115,7 +115,7 @@ def ingest(db_module):
 ])
 def test_ingest(book_id, fields):
 
-    row = Metadata.query.filter_by(book_id=book_id).one()
+    row = Profile.query.filter_by(book_id=book_id).one()
 
     for key, val in fields.items():
         assert getattr(row, key) == val

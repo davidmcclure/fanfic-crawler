@@ -43,7 +43,7 @@ def is_genre(text: str) -> bool:
     return bool(set(tokens).intersection(GENRES))
 
 
-class MetadataDetailsParser(OrderedDict):
+class ProfileDetailsParser(OrderedDict):
 
     def __init__(self, details):
 

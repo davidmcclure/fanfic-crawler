@@ -7,17 +7,17 @@ from sqlalchemy import Column, String, ForeignKey
 from lxml import html
 
 from fanfic.services import session
-from fanfic.parsers import MetadataDetailsParser
+from fanfic.parsers import ProfileDetailsParser
 from fanfic.utils import extract_int
 
 from .base import Base
 from .mixins import ScrapyItem
-from .metadata import Metadata
+from .profile import Profile
 
 
-class MetadataHTML(Base, ScrapyItem):
+class ProfileHTML(Base, ScrapyItem):
 
-    __tablename__ = 'metadata_html'
+    __tablename__ = 'profile_html'
 
     book_id = Column(
         ForeignKey('book_id.book_id'),
@@ -139,7 +139,7 @@ class MetadataHTML(Base, ScrapyItem):
         Parse fields out of the details string.
         """
 
-        details = MetadataDetailsParser(self.details_string())
+        details = ProfileDetailsParser(self.details_string())
 
         return dict(
             follows=details.follows(),
@@ -153,14 +153,14 @@ class MetadataHTML(Base, ScrapyItem):
     def parse(self):
 
         """
-        Map into the Metadata model.
+        Map into the Profile model.
 
-        Returns: Metadata
+        Returns: Profile
         """
 
         details = self.details()
 
-        return Metadata(
+        return Profile(
             book_id=self.book_id,
             title=self.title(),
             user_id=self.user_id(),

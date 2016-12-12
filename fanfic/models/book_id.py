@@ -14,7 +14,7 @@ class BookId(Base):
 
     chapters = relationship('Chapter')
 
-    metadata_html = relationship('MetadataHTML')
+    profiles_html = relationship('ProfileHTML')
 
     reviews_html = relationship('ReviewHTML')
 
@@ -43,15 +43,15 @@ class BookId(Base):
         return [row.book_id for row in query]
 
     @classmethod
-    def without_metadata(cls):
+    def without_profiles(cls):
 
         """
-        Get book ids without downloaded metadata.
+        Get book ids without downloaded profiles.
         """
 
         query = (
             cls.query
-            .filter(cls.metadata_html == None)  # noqa: E711
+            .filter(cls.profiles_html == None)  # noqa: E711
             .all()
         )
 

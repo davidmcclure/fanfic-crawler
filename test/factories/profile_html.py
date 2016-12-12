@@ -3,14 +3,14 @@
 import factory
 
 from fanfic.services import session
-from fanfic.models import MetadataHTML
+from fanfic.models import ProfileHTML
 
 
-class MetadataHTMLFactory(factory.alchemy.SQLAlchemyModelFactory):
+class ProfileHTMLFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     class Meta:
         sqlalchemy_session = session
-        model = MetadataHTML
+        model = ProfileHTML
 
     book_id = factory.Sequence(
         lambda n: n

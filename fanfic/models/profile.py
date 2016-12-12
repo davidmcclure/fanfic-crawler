@@ -6,9 +6,9 @@ from .base import Base
 
 
 # TODO: Set required metadata fields.
-class Metadata(Base):
+class Profile(Base):
 
-    __tablename__ = 'metadata'
+    __tablename__ = 'profile'
 
     book_id = Column(Integer, primary_key=True, autoincrement=False)
 

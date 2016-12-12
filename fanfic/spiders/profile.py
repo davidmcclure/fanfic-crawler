@@ -2,14 +2,14 @@
 
 import time
 
-from fanfic.items import MetadataHTMLItem
+from fanfic.items import ProfileHTMLItem
 
 from .book import BookSpider
 
 
-class MetadataSpider(BookSpider):
+class ProfileSpider(BookSpider):
 
-    name = 'metadata'
+    name = 'profile'
 
     def parse(self, res):
 
@@ -17,15 +17,15 @@ class MetadataSpider(BookSpider):
         Extract book metadata fields.
         """
 
-        metadata = (
+        profile = (
             res.selector
             .xpath('//div[@id="profile_top"]')
             .extract_first()
         )
 
-        yield MetadataHTMLItem(
+        yield ProfileHTMLItem(
             book_id=self.book_id,
-            html=metadata,
+            html=profile,
         )
 
     def close(self, reason):
