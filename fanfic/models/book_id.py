@@ -16,7 +16,11 @@ class BookId(Base):
 
     profiles_html = relationship('ProfileHTML')
 
+    profiles = relationship('Profile')
+
     reviews_html = relationship('ReviewHTML')
+
+    reviews = relationship('Review')
 
     @classmethod
     def ids(cls):
