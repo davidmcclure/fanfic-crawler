@@ -3,15 +3,15 @@
 import os
 
 
-def get_fixture(itemtype, id):
+def read_metadata_fixture(book_id: int):
 
     """
-    Read fixture text.
+    Read a metadata fixture.
     """
 
     path = os.path.join(
         os.path.dirname(__file__),
-        'fixtures/{}/{}.html'.format(itemtype, id),
+        'fixtures/metadata/{}.html'.format(book_id),
     )
 
     with open(path) as fh:

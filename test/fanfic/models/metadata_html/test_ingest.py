@@ -7,7 +7,7 @@ from datetime import datetime as dt
 from fanfic.models import MetadataHTML, Metadata
 from fanfic.database import session
 
-from test.utils import get_fixture
+from test.utils import read_metadata_fixture
 
 
 pytestmark = pytest.mark.usefixtures('db')
@@ -101,7 +101,7 @@ pytestmark = pytest.mark.usefixtures('db')
 ])
 def test_ingest(book_id, fields):
 
-    html = get_fixture('metadata', book_id)
+    html = read_metadata_fixture(book_id)
 
     html_row = MetadataHTML(book_id=book_id, html=html)
 
