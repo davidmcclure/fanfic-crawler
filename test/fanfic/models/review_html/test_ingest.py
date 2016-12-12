@@ -5,7 +5,7 @@ import pytest
 from datetime import datetime as dt
 
 from fanfic.models import ReviewHTML, Review
-from fanfic.database import session
+from fanfic.services import session
 from fanfic.utils import flatten_dict
 
 from test.utils import read_yaml

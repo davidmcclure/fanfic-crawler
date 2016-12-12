@@ -2,7 +2,7 @@
 
 import pytest
 
-from fanfic.database import config as _config, session
+from fanfic.services import config as _config, session
 from fanfic.models import Base
 
 

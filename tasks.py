@@ -2,7 +2,7 @@
 
 from invoke import task
 
-from fanfic.database import config
+from fanfic.services import config
 from fanfic.models import Base
 
 

@@ -5,7 +5,7 @@ import pytest
 from datetime import datetime as dt
 
 from fanfic.models import MetadataHTML, Metadata
-from fanfic.database import session
+from fanfic.services import session
 
 from test.utils import read_yaml
 
