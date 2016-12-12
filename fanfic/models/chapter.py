@@ -10,8 +10,8 @@ class Chapter(Base, ScrapyItem):
 
     __tablename__ = 'chapter'
 
-    book_id = Column(Integer, primary_key=True)
+    book_id = Column(Integer, primary_key=True, autoincrement=False)
 
-    chapter_number = Column(Integer, primary_key=True)
+    chapter_number = Column(Integer, primary_key=True, autoincrement=False)
 
     chapter = Column(String, nullable=False)

@@ -19,7 +19,7 @@ class MetadataHTML(Base, ScrapyItem):
 
     __tablename__ = 'metadata_html'
 
-    book_id = Column(Integer, primary_key=True)
+    book_id = Column(Integer, primary_key=True, autoincrement=False)
 
     html = Column(String, nullable=False)
 

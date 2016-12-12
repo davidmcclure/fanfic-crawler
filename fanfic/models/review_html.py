@@ -49,17 +49,6 @@ class ReviewHTML(Base, ScrapyItem):
 
         return html.fragment_fromstring(self.html)
 
-    # def review_id(self):
-
-        # """
-        # Match the review id.
-        # """
-
-        # return int(
-            # re.search('reviewid=(?P<id>[0-9]+)', self.html)
-            # .group('id')
-        # )
-
     def review(self):
 
         """

@@ -9,7 +9,7 @@ class BookId(Base):
 
     __tablename__ = 'book_id'
 
-    book_id = Column(Integer, primary_key=True)
+    book_id = Column(Integer, primary_key=True, autoincrement=False)
 
     @classmethod
     def ids(cls):
