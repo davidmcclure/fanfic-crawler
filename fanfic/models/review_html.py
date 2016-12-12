@@ -105,3 +105,13 @@ class ReviewHTML(Base, ScrapyItem):
         else:
             guest = self.tree.xpath('td/text()')[0]
             return clean_string(guest)
+
+    def chapter_number(self):
+
+        """
+        Get the chapter number.
+        """
+
+        small = self.tree.xpath('td/small/text()')[0]
+
+        return extract_int(small.split('.')[0])
