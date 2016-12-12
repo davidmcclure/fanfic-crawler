@@ -4,7 +4,7 @@
 import click
 
 from fanfic.models import BookId
-from fanfic.jobs import crawl_metadata
+from fanfic.jobs import crawl_metadata, crawl_chapters, crawl_reviews
 
 
 @click.group()
@@ -16,6 +16,18 @@ def cli():
 def queue_metadata():
     for book_id in BookId.ids():
         crawl_metadata.delay(book_id)
+
+
+@cli.command()
+def queue_chapters():
+    for book_id in BookId.ids():
+        crawl_chapters.delay(book_id)
+
+
+@cli.command()
+def queue_reviews():
+    for book_id in BookId.ids():
+        crawl_reviews.delay(book_id)
 
 
 if __name__ == '__main__':
