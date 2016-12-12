@@ -1,7 +1,7 @@
 """Create initial models.
 
 Revision ID: b26ec77f035f
-Revises: 
+Revises:
 Create Date: 2016-12-12 10:37:58.972885
 
 """

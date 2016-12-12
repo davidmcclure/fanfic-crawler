@@ -55,7 +55,7 @@ class Config(dict):
         """
 
         return URL(**dict(
-            drivername='postgresql',
+            drivername='sqlite',
             database=self['database'],
         ))
 
