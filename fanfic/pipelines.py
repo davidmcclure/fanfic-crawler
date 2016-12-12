@@ -12,7 +12,7 @@ class SQLAlchemyPipeline(object):
         """
 
         session.add(item.row())
-        # session.commit()
+        session.commit()
 
         return item
 
