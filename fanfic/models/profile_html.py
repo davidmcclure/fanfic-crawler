@@ -31,7 +31,7 @@ class ProfileHTML(Base, ScrapyItem):
     def ingest(cls):
 
         """
-        Parse HTML, load rows into Metadata.
+        Parse HTML, load rows into Profile.
         """
 
         for html in cls.query.all():
