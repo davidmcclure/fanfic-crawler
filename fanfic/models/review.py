@@ -17,15 +17,13 @@ class Review(Base):
 
     __tablename__ = 'review'
 
-    id = Column(Integer, primary_key=True)
+    review_id = Column(Integer, primary_key=True)
 
     html_id = Column(Integer, ForeignKey('review_html.id'), nullable=False)
 
     html = relationship('ReviewHTML')
 
     book_id = Column(Integer, nullable=False)
-
-    review_id = Column(Integer, nullable=False)
 
     user_id = Column(Integer, nullable=True)
 
