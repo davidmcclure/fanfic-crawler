@@ -7,4 +7,4 @@ config = Config.from_env()
 
 session = config.build_sqla_session()
 
-queue = config.build_queue()
+redis = config.build_redis()
