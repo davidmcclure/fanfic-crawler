@@ -21,8 +21,14 @@ def ingest(db_module):
     Write HTML fixtures into the database.
     """
 
-    for (book_id, _), html in flatten_dict(cases):
-        row = ReviewHTML(book_id=book_id, html=html)
+    for (book_id, review_id), html in flatten_dict(cases):
+
+        row = ReviewHTML(
+            book_id=book_id,
+            review_id=review_id,
+            html=html,
+        )
+
         session.add(row)
 
     ReviewHTML.ingest()

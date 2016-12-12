@@ -20,9 +20,9 @@ class ReviewHTML(Base, ScrapyItem):
 
     __tablename__ = 'review_html'
 
-    id = Column(Integer, primary_key=True)
-
     book_id = Column(Integer, nullable=False)
+
+    review_id = Column(Integer, primary_key=True)
 
     html = Column(String, nullable=False)
 
@@ -49,16 +49,16 @@ class ReviewHTML(Base, ScrapyItem):
 
         return html.fragment_fromstring(self.html)
 
-    def review_id(self):
+    # def review_id(self):
 
-        """
-        Match the review id.
-        """
+        # """
+        # Match the review id.
+        # """
 
-        return int(
-            re.search('reviewid=(?P<id>[0-9]+)', self.html)
-            .group('id')
-        )
+        # return int(
+            # re.search('reviewid=(?P<id>[0-9]+)', self.html)
+            # .group('id')
+        # )
 
     def review(self):
 
@@ -127,7 +127,7 @@ class ReviewHTML(Base, ScrapyItem):
 
         return Review(
             book_id=self.book_id,
-            review_id=self.review_id(),
+            review_id=self.review_id,
             user_id=self.user_id(),
             username=self.username(),
             chapter_number=self.chapter_number(),
