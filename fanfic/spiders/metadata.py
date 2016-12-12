@@ -1,5 +1,7 @@
 
 
+import time
+
 from fanfic.items import MetadataHTMLItem
 
 from .book import BookSpider
@@ -25,3 +27,12 @@ class MetadataSpider(BookSpider):
             book_id=self.book_id,
             html=metadata,
         )
+
+    def close(self):
+
+        """
+        Pause before closing, to throttle requests when the spider is run
+        serially by a job queue.
+        """
+
+        time.sleep(self.settings['DOWNLOAD_DELAY'])
