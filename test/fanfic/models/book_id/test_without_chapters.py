@@ -1,8 +1,13 @@
 
 
+import pytest
+
 from fanfic.models import BookId
 
 from test.factories import BookIdFactory, ChapterFactory
+
+
+pytestmark = pytest.mark.usefixtures('db')
 
 
 def test_without_chapters():
