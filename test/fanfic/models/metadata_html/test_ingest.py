@@ -7,10 +7,24 @@ from datetime import datetime as dt
 from fanfic.models import MetadataHTML, Metadata
 from fanfic.database import session
 
-from test.utils import read_metadata_fixture
+from test.utils import read_yaml
 
 
-pytestmark = pytest.mark.usefixtures('db')
+cases = read_yaml(__file__, 'ingest.yml')
+
+
+@pytest.fixture(scope='module', autouse=True)
+def ingest(db_module):
+
+    """
+    Write HTML fixtures into the database.
+    """
+
+    for book_id, html in cases.items():
+        row = MetadataHTML(book_id=book_id, html=html)
+        session.add(row)
+
+    MetadataHTML.ingest()
 
 
 # TODO: Ingest once, check all rows?
@@ -101,14 +115,6 @@ pytestmark = pytest.mark.usefixtures('db')
 
 ])
 def test_ingest(book_id, fields):
-
-    html = read_metadata_fixture(book_id)
-
-    html_row = MetadataHTML(book_id=book_id, html=html)
-
-    session.add(html_row)
-
-    MetadataHTML.ingest()
 
     row = Metadata.query.filter_by(book_id=book_id).one()
 

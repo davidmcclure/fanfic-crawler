@@ -5,6 +5,7 @@ from sqlalchemy import Column, Integer, String, DateTime
 from .base import Base
 
 
+# TODO: Set required metadata fields.
 class Metadata(Base):
 
     __tablename__ = 'metadata'

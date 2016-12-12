@@ -25,6 +25,8 @@ class Review(Base):
 
     book_id = Column(Integer, nullable=False)
 
+    review_id = Column(Integer, nullable=False)
+
     user_id = Column(Integer, nullable=True)
 
     username = Column(String, nullable=True)
