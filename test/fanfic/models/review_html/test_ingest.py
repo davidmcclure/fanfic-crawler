@@ -6,6 +6,7 @@ from datetime import datetime as dt
 
 from fanfic.models import ReviewHTML, Review
 from fanfic.database import session
+from fanfic.utils import flatten_dict
 
 from test.utils import read_yaml
 
@@ -20,10 +21,9 @@ def ingest(db_module):
     Write HTML fixtures into the database.
     """
 
-    for book_id, reviews in cases.items():
-        for _, html in reviews.items():
-            row = ReviewHTML(book_id=book_id, html=html)
-            session.add(row)
+    for (book_id, _), html in flatten_dict(cases):
+        row = ReviewHTML(book_id=book_id, html=html)
+        session.add(row)
 
     ReviewHTML.ingest()
 
@@ -36,7 +36,7 @@ def ingest(db_module):
         user_id=8550699,
         username='Ramona125',
         chapter_number=1,
-        review="I love your story! Great writing! Please update soon. I would love to find out how Minerva's going to react and how the story's going to continue.",
+        review="I love your story! Great writing! Please update soon. I would love to find out how Minerva's going to react and how the story's going to continue.",  # noqa: E501
         published=dt.fromtimestamp(1481506897),
     )),
 

@@ -31,3 +31,31 @@ def atoi(value: str) -> int:
     """
 
     return int(value.replace(',', ''))
+
+
+def flatten_dict(d, root=True):
+
+    """
+    Flatten a dict into a list of tuples.
+
+    Args:
+        nested (dict)
+
+    Yields: ((key1, key2, ...), val)
+    """
+
+    for k, v in d.items():
+
+        if isinstance(v, dict):
+            for item in flatten_dict(v, False):
+
+                # At root level, break away the key path from the value.
+                if root:
+                    yield ((k,) + item[:-1], item[-1])
+
+                # Otherwise build up the key chain.
+                else:
+                    yield (k,) + item
+
+        else:
+            yield (k, v)
