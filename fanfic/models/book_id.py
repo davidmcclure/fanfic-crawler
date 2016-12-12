@@ -1,6 +1,7 @@
 
 
 from sqlalchemy import Column, Integer
+from sqlalchemy.orm import relationship
 
 from .base import Base
 
@@ -10,6 +11,8 @@ class BookId(Base):
     __tablename__ = 'book_id'
 
     book_id = Column(Integer, primary_key=True, autoincrement=False)
+
+    chapters = relationship('Chapter')
 
     @classmethod
     def ids(cls):
@@ -21,10 +24,16 @@ class BookId(Base):
         return [r.book_id for r in cls.query.all()]
 
     @classmethod
-    def without_chapters(cls) -> list:
+    def without_chapters(cls):
 
         """
-        Get book IDs without downloaded chapters.
+        Get book ids without any downloaded chapters.
         """
 
-        pass
+        query = (
+            cls.query
+            .filter(cls.chapters == None)
+            .all()
+        )
+
+        return [row.book_id for row in query]

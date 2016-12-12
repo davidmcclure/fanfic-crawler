@@ -20,7 +20,7 @@ def queue_metadata():
 
 @cli.command()
 def queue_chapters():
-    for book_id in BookId.ids():
+    for book_id in BookId.without_chapters():
         crawl_chapters.delay(book_id)
 
 
