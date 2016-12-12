@@ -1,6 +1,14 @@
 
 
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    ForeignKey,
+    DateTime,
+)
+
+from sqlalchemy.orm import relationship
 
 from .base import Base
 
@@ -9,7 +17,17 @@ class Review(Base):
 
     __tablename__ = 'review'
 
-    book_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
+
+    html_id = Column(
+        Integer,
+        ForeignKey('review_html.id'),
+        nullable=False,
+    )
+
+    html = relationship('ReviewHTML')
+
+    book_id = Column(Integer, nullable=False)
 
     user_id = Column(Integer, nullable=True)
 
@@ -19,4 +37,4 @@ class Review(Base):
 
     review = Column(String, nullable=True)
 
-    published = Column(Date, nullable=True)
+    published = Column(DateTime, nullable=True)
