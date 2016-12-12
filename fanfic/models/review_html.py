@@ -22,7 +22,7 @@ class ReviewHTML(Base, ScrapyItem):
 
     book_id = Column(Integer, nullable=False)
 
-    review_id = Column(Integer, primary_key=True)
+    review_id = Column(Integer, primary_key=True, autoincrement=False)
 
     html = Column(String, nullable=False)
 
