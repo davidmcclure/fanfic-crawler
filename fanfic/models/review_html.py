@@ -7,7 +7,7 @@ from sqlalchemy import Column, Integer, String
 from lxml import html
 
 from fanfic.database import session
-from fanfic.utils import clean_string
+from fanfic.utils import clean_string, extract_int
 
 from .base import Base
 from .mixins import ScrapyItem
@@ -63,6 +63,18 @@ class ReviewHTML(Base, ScrapyItem):
         xutime = self.tree.xpath('//*[@data-xutime]/@data-xutime')[0]
 
         return dt.fromtimestamp(int(xutime))
+
+    def user_id(self):
+
+        """
+        Try to get a registered username, fall back on guest name.
+        """
+
+        user = self.tree.xpath('td/a/@href')
+
+        # Take the user id, if present.
+        if len(user):
+            return extract_int(user[0])
 
     def username(self):
 

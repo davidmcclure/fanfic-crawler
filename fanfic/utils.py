@@ -9,6 +9,8 @@ def extract_int(href: str) -> int:
     Extract a numeric id from an href.
     """
 
+    # TODO: Should this always take the first match?
+
     return int(re.search('[0-9]+', href).group())
 
 
