@@ -1,6 +1,6 @@
 
 
-from fanfic.singletons import session
+from fanfic.services import session
 
 
 class SQLAlchemyPipeline(object):

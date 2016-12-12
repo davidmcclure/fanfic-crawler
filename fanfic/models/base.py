@@ -2,7 +2,7 @@
 
 from sqlalchemy.ext.declarative import declarative_base
 
-from fanfic.singletons import session
+from fanfic.services import session
 
 
 Base = declarative_base()

@@ -8,7 +8,7 @@ from cached_property import cached_property
 from sqlalchemy import Column, Integer, String
 from lxml import html
 
-from fanfic.singletons import session
+from fanfic.services import session
 from fanfic.utils import clean_string, extract_int
 
 from .base import Base
