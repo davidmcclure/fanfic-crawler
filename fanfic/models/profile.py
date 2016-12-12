@@ -1,6 +1,6 @@
 
 
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 
 from .base import Base
 
@@ -10,7 +10,11 @@ class Profile(Base):
 
     __tablename__ = 'profile'
 
-    book_id = Column(Integer, primary_key=True, autoincrement=False)
+    book_id = Column(
+        ForeignKey('book_id.book_id'),
+        primary_key=True,
+        autoincrement=False,
+    )
 
     title = Column(String, nullable=True)
 

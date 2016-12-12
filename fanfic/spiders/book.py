@@ -31,5 +31,7 @@ class BookSpider(Spider):
         Flush items to disk when the crawl finishes.
         """
 
+        # TODO: Test this.
+
         if reason == 'finished':
             session.commit()

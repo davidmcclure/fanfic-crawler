@@ -1,11 +1,6 @@
 
 
-from sqlalchemy import (
-    Column,
-    Integer,
-    String,
-    DateTime,
-)
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 
 from .base import Base
 
@@ -14,7 +9,11 @@ class Review(Base):
 
     __tablename__ = 'review'
 
-    book_id = Column(Integer, nullable=False)
+    book_id = Column(
+        ForeignKey('book_id.book_id'),
+        primary_key=True,
+        autoincrement=False,
+    )
 
     review_id = Column(Integer, primary_key=True, autoincrement=False)
 
