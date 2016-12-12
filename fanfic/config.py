@@ -7,6 +7,9 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.engine.url import URL
 
+from rq import Queue
+from redis import Redis
+
 
 class Config(dict):
 
@@ -100,3 +103,13 @@ class Config(dict):
         """
 
         return scoped_session(self.build_sqla_sessionmaker())
+
+    def build_queue(self):
+
+        """
+        Build a RQ instance.
+
+        Returns: Queue
+        """
+
+        return Queue(connection=Redis())
