@@ -2,7 +2,6 @@
 ipython
 anyconfig
 PyYAML
-psycopg2
 scrapy
 scrapy-fake-useragent
 invoke
