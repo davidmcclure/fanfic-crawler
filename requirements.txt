@@ -2,9 +2,11 @@
 ipython
 anyconfig
 PyYAML
+sqlalchemy
 scrapy
 scrapy-fake-useragent
 invoke
+nltk
 python-dateutil
 pytest
 pytest-env
