@@ -37,4 +37,4 @@ class ProfileSpider(BookSpider):
 
         super().closed(*args, **kwargs)
 
-        time.sleep(self.settings['DOWNLOAD_DELAY'])
+        time.sleep(2)
