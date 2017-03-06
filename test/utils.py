@@ -5,9 +5,7 @@ import yaml
 
 
 def read_yaml(from_path, file_name):
-
-    """
-    Open a YAML file relative to the passed path.
+    """Open a YAML file relative to the passed path.
 
     Args:
         from_path (str)
@@ -15,7 +13,6 @@ def read_yaml(from_path, file_name):
 
     Returns: dict
     """
-
     path = os.path.join(os.path.dirname(from_path), file_name)
 
     with open(path, 'r') as fh:
@@ -23,11 +20,8 @@ def read_yaml(from_path, file_name):
 
 
 def read_metadata_fixture(book_id: int):
-
+    """Read a metadata fixture.
     """
-    Read a metadata fixture.
-    """
-
     path = os.path.join(
         os.path.dirname(__file__),
         'fixtures/metadata/{}.html'.format(book_id),

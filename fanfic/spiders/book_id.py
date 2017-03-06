@@ -17,11 +17,8 @@ class BookIdSpider(Spider):
     )]
 
     def parse(self, res):
-
+        """Collect book ids, continue to the next page.
         """
-        Collect book ids, continue to the next page.
-        """
-
         # Generate books ids.
 
         for href in res.xpath('//a[@class="stitle"]/@href').extract():

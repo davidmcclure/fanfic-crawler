@@ -29,11 +29,8 @@ class ProfileHTML(Base, ScrapyItem):
 
     @classmethod
     def ingest(cls):
-
+        """Parse HTML, load rows into Profile.
         """
-        Parse HTML, load rows into Profile.
-        """
-
         for html in cls.query.all():
             session.add(html.parse())
 
@@ -41,63 +38,42 @@ class ProfileHTML(Base, ScrapyItem):
 
     @cached_property
     def tree(self):
-
-        """
-        Wrap the HTML as a Scrapy selector.
+        """Wrap the HTML as a Scrapy selector.
 
         Returns: Selector
         """
-
         return html.fragment_fromstring(self.html)
 
     def title(self):
-
+        """Query the title.
         """
-        Query the title.
-        """
-
         return self.tree.xpath('b/text()')[0]
 
     def user_id(self):
-
+        """Query the title.
         """
-        Query the title.
-        """
-
         href = self.tree.xpath('a/@href')[0]
 
         return extract_int(href)
 
     def username(self):
-
+        """Query the username.
         """
-        Query the username.
-        """
-
         return self.tree.xpath('a/text()')[0]
 
     def summary(self):
-
+        """Query the summary.
         """
-        Query the summary.
-        """
-
         return self.tree.xpath('div/text()')[0]
 
     def xutimes(self):
-
+        """Query data-xutime timestamps.
         """
-        Query data-xutime timestamps.
-        """
-
         return self.tree.xpath('//*[@data-xutime]/@data-xutime')
 
     def published(self):
-
+        """Query the published timestamp.
         """
-        Query the published timestamp.
-        """
-
         xutimes = self.xutimes()
 
         # If there are 2 xutimes, published is the second. Otherwise, it is the
@@ -108,11 +84,8 @@ class ProfileHTML(Base, ScrapyItem):
         return dt.fromtimestamp(int(xutimes[offset]))
 
     def updated(self):
-
+        """Query the updated timestamp.
         """
-        Query the updated timestamp.
-        """
-
         xutimes = self.xutimes()
 
         # If there are 2 xutimes, updated is the first. Otherwise, there is no
@@ -124,21 +97,15 @@ class ProfileHTML(Base, ScrapyItem):
         )
 
     def details_string(self):
-
+        """Query the raw metadata string.
         """
-        Query the raw metadata string.
-        """
-
         parts = self.tree.xpath('span[position()=last()]//text()')
 
         return ''.join(parts)
 
     def details(self):
-
+        """Parse fields out of the details string.
         """
-        Parse fields out of the details string.
-        """
-
         details = ProfileDetailsParser(self.details_string())
 
         return dict(
@@ -151,13 +118,10 @@ class ProfileHTML(Base, ScrapyItem):
         )
 
     def parse(self):
-
-        """
-        Map into the Profile model.
+        """Map into the Profile model.
 
         Returns: Profile
         """
-
         details = self.details()
 
         return Profile(

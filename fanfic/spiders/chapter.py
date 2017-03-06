@@ -14,11 +14,8 @@ class ChapterSpider(BookSpider):
     name = 'chapter'
 
     def parse(self, res):
-
+        """Collect chapter text, continue to the next page.
         """
-        Collect chapter text, continue to the next page.
-        """
-
         chapter_number = int(
             res.selector
             .xpath('//select[@id="chap_select"]/option[@selected]/@value')

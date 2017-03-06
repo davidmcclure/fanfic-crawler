@@ -10,11 +10,8 @@ class BookSpider(Spider):
     fanfic_prefix = 's'
 
     def __init__(self, book_id, *args, **kwargs):
-
+        """Parametrize from a book id.
         """
-        Parametrize from a book id.
-        """
-
         super().__init__(*args, **kwargs)
 
         url = 'https://www.fanfiction.net/{}/{}/'.format(
@@ -26,11 +23,8 @@ class BookSpider(Spider):
         self.book_id = book_id
 
     def closed(self, reason):
-
+        """Flush items to disk when the crawl finishes.
         """
-        Flush items to disk when the crawl finishes.
-        """
-
         # TODO: Test this.
 
         if reason == 'finished':

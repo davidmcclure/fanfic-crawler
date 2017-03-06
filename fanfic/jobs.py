@@ -8,11 +8,8 @@ from fanfic.services import redis
 
 
 def crawl(spider: str, book_id: int):
-
+    """Run a spider on a book id.
     """
-    Run a spider on a book id.
-    """
-
     proc = CrawlerProcess(get_project_settings())
 
     proc.crawl(spider, book_id=book_id)

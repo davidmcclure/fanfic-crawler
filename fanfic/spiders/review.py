@@ -16,11 +16,8 @@ class ReviewSpider(BookSpider):
     fanfic_prefix = 'r'
 
     def parse(self, res):
-
+        """Extract reviews, continue to the next page.
         """
-        Extract reviews, continue to the next page.
-        """
-
         # Extract reviews.
 
         for tr in res.selector.xpath('//table[@id="gui_table1i"]/tbody/tr'):

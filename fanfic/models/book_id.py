@@ -24,20 +24,14 @@ class BookId(Base):
 
     @classmethod
     def ids(cls):
-
+        """Provide book ids as a list.
         """
-        Provide book ids as a list.
-        """
-
         return [r.book_id for r in cls.query.all()]
 
     @classmethod
     def without_chapters(cls):
-
+        """Get book ids without any downloaded chapters.
         """
-        Get book ids without any downloaded chapters.
-        """
-
         query = (
             cls.query
             .filter(cls.chapters == None)  # noqa: E711
@@ -48,11 +42,8 @@ class BookId(Base):
 
     @classmethod
     def without_profiles(cls):
-
+        """Get book ids without downloaded profiles.
         """
-        Get book ids without downloaded profiles.
-        """
-
         query = (
             cls.query
             .filter(cls.profiles_html == None)  # noqa: E711
@@ -63,11 +54,8 @@ class BookId(Base):
 
     @classmethod
     def without_reviews(cls):
-
+        """Get book ids without any downloaded reviews.
         """
-        Get book ids without any downloaded reviews.
-        """
-
         query = (
             cls.query
             .filter(cls.reviews_html == None)  # noqa: E711

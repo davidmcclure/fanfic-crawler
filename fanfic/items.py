@@ -8,11 +8,8 @@ from fanfic.models import BookId, Chapter, ProfileHTML, ReviewHTML
 class SQLAlchemyItemMeta(ItemMeta):
 
     def __new__(meta, name, bases, dct):
-
+        """Set item fields from SQLAlchemy columns.
         """
-        Set item fields from SQLAlchemy columns.
-        """
-
         cls = ItemMeta.__new__(meta, name, bases, dct)
 
         if cls.model:
@@ -28,11 +25,8 @@ class SQLAlchemyItem(Item, metaclass=SQLAlchemyItemMeta):
     model = None
 
     def row(self):
-
+        """Make the SQLAlchemy model instance.
         """
-        Make the SQLAlchemy model instance.
-        """
-
         return self.model(**self)
 
 

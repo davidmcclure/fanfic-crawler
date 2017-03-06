@@ -33,11 +33,8 @@ GENRES = set([
 
 
 def is_genre(text: str) -> bool:
-
+    """Check if a string contains any of the genre words.
     """
-    Check if a string contains any of the genre words.
-    """
-
     tokens = RegexpTokenizer('[a-zA-Z]+').tokenize(text)
 
     return bool(set(tokens).intersection(GENRES))
@@ -46,11 +43,8 @@ def is_genre(text: str) -> bool:
 class ProfileDetailsParser(OrderedDict):
 
     def __init__(self, details):
-
+        """Parse the raw details string.
         """
-        Parse the raw details string.
-        """
-
         parts = details.split('-')
 
         for part in parts:
@@ -63,12 +57,9 @@ class ProfileDetailsParser(OrderedDict):
                 self[clean_string(part)] = None
 
     def parse_key(self, key, parse=None, default=None):
-
-        """
-        Look up a key. If a parse function is provided, apply it. If the key
+        """Look up a key. If a parse function is provided, apply it. If the key
         is missing, return the default.
         """
-
         val = self.get(key)
 
         if val:
@@ -78,43 +69,28 @@ class ProfileDetailsParser(OrderedDict):
             return default
 
     def follows(self) -> int:
-
+        """Cast 'Follows' to an integer.
         """
-        Cast 'Follows' to an integer.
-        """
-
         return self.parse_key('Follows', atoi)
 
     def favorites(self) -> int:
-
+        """Cast 'Favs' to an integer.
         """
-        Cast 'Favs' to an integer.
-        """
-
         return self.parse_key('Favs', atoi)
 
     def rating(self) -> str:
-
+        """Provide 'Rated' as-is.
         """
-        Provide 'Rated' as-is.
-        """
-
         return self.get('Rated')
 
     def language(self) -> str:
-
+        """Language is always the second element.
         """
-        Language is always the second element.
-        """
-
         return list(self.keys())[1]
 
     def genres(self) -> str:
-
+        """Try to find a genres list.
         """
-        Try to find a genres list.
-        """
-
         keys = list(self.keys())
 
         if keys[4] == 'Chapters':
@@ -124,11 +100,8 @@ class ProfileDetailsParser(OrderedDict):
             return keys[2]
 
     def characters(self) -> str:
-
+        """Try to find a characters list.
         """
-        Try to find a characters list.
-        """
-
         keys = list(self.keys())
 
         if keys[4] == 'Chapters':

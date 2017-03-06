@@ -14,11 +14,8 @@ class Config(dict):
 
     @classmethod
     def from_env(cls):
-
+        """Get a config instance with the default files.
         """
-        Get a config instance with the default files.
-        """
-
         root = os.environ.get('FANFIC_CONFIG', '~/.fanfic')
 
         # Default paths.
@@ -34,39 +31,30 @@ class Config(dict):
         return cls(paths)
 
     def __init__(self, paths):
-
-        """
-        Initialize the configuration object.
+        """Initialize the configuration object.
 
         Args:
             paths (list): YAML paths, from most to least specific.
         """
-
         config = anyconfig.load(paths, ignore_missing=True)
 
         return super().__init__(config)
 
     def build_sqla_url(self):
-
-        """
-        Build a SQLAlchemy connection string.
+        """Build a SQLAlchemy connection string.
 
         Returns: Engine
         """
-
         return URL(**dict(
             drivername='sqlite',
             database=self['database'],
         ))
 
     def build_sqla_engine(self):
-
-        """
-        Build a SQLAlchemy engine.
+        """Build a SQLAlchemy engine.
 
         Returns: Engine
         """
-
         url = self.build_sqla_url()
 
         engine = create_engine(url)
@@ -84,31 +72,22 @@ class Config(dict):
         return engine
 
     def build_sqla_sessionmaker(self):
-
-        """
-        Build a SQLAlchemy session class.
+        """Build a SQLAlchemy session class.
 
         Returns: Session
         """
-
         return sessionmaker(bind=self.build_sqla_engine())
 
     def build_sqla_session(self):
-
-        """
-        Build a scoped session manager.
+        """Build a scoped session manager.
 
         Returns: Session
         """
-
         return scoped_session(self.build_sqla_sessionmaker())
 
     def build_redis(self):
-
-        """
-        Build a Redis instance.
+        """Build a Redis instance.
 
         Returns: Redis
         """
-
         return Redis()

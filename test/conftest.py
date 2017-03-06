@@ -8,11 +8,8 @@ from fanfic.models import Base
 
 @pytest.fixture(scope='session', autouse=True)
 def init_testing_db():
-
+    """Drop and recreate the tables.
     """
-    Drop and recreate the tables.
-    """
-
     engine = _config.build_sqla_engine()
 
     Base.metadata.drop_all(engine)
@@ -21,11 +18,8 @@ def init_testing_db():
 
 @pytest.yield_fixture
 def db():
-
+    """Wrap tests inside a transaction.
     """
-    Wrap tests inside a transaction.
-    """
-
     session.begin_nested()
 
     yield
