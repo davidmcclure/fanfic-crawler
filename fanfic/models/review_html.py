@@ -5,6 +5,7 @@ from datetime import datetime as dt
 from cached_property import cached_property
 from sqlalchemy import Column, Integer, String, ForeignKey
 from lxml import html
+from boltons.iterutils import chunked_iter
 
 from fanfic.services import session
 from fanfic.utils import clean_string, extract_int
@@ -29,13 +30,23 @@ class ReviewHTML(Base, ScrapyItem):
     html = Column(String, nullable=False)
 
     @classmethod
-    def ingest(cls):
+    def ingest(cls, n=1000):
         """Parse HTML, load rows into Review.
         """
-        for html in cls.query.all():
-            session.add(html.parse())
+        query = cls.query.yield_per(n)
 
-        session.commit()
+        for i, chunk in enumerate(chunked_iter(query, n)):
+
+            for html in chunk:
+
+                try:
+                    session.add(html.parse())
+
+                except Exception as e:
+                    print(e, html.html)
+
+            session.commit()
+            print((i + 1) * n)
 
     @cached_property
     def tree(self):
