@@ -30,18 +30,24 @@ class ReviewHTML(Base, ScrapyItem):
     html = Column(String, nullable=False)
 
     @classmethod
-    def ingest(cls, n=1000):
+    def ingest(cls):
         """Parse HTML, load rows into Review.
         """
-        query = cls.query.yield_per(n)
+        for i, book_id in enumerate(cls.book_ids()):
 
-        for i, chunk in enumerate(chunked_iter(query, n)):
-
-            for html in chunk:
+            for html in cls.query.filter_by(book_id=book_id):
                 session.add(html.parse())
 
             session.commit()
-            print((i + 1) * n)
+            print(i)
+
+    @classmethod
+    def book_ids(cls):
+        """Get distinct book ids.
+        """
+        query = session.query(cls.book_id).distinct()
+
+        return [r[0] for r in query]
 
     @cached_property
     def tree(self):
