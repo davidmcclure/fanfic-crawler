@@ -38,12 +38,7 @@ class ReviewHTML(Base, ScrapyItem):
         for i, chunk in enumerate(chunked_iter(query, n)):
 
             for html in chunk:
-
-                try:
-                    session.add(html.parse())
-
-                except Exception as e:
-                    print(e, html.html)
+                session.add(html.parse())
 
             session.commit()
             print((i + 1) * n)
@@ -59,7 +54,9 @@ class ReviewHTML(Base, ScrapyItem):
     def review(self):
         """Query the review.
         """
-        return self.tree.xpath('td/div/text()')[0]
+        text = self.tree.xpath('td/div/text()')
+
+        return text[0] if text else None
 
     def published(self):
         """Query the publication date.

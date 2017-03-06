@@ -78,6 +78,17 @@ def ingest(db_module):
         published=dt.fromtimestamp(1480485582),
     )),
 
+    # Empty comment.
+    (1344568, dict(
+        review_id=1344568,
+        book_id=11049,
+        user_id=37384,
+        username='Aireon Granger',
+        chapter_number=5,
+        review=None,
+        published=dt.fromtimestamp(981705600),
+    )),
+
 ])
 def test_ingest(review_id, fields):
 
