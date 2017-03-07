@@ -5,7 +5,6 @@ from datetime import datetime as dt
 from cached_property import cached_property
 from sqlalchemy import Column, Integer, String, ForeignKey
 from lxml import html
-from boltons.iterutils import chunked_iter
 
 from fanfic.services import session
 from fanfic.utils import clean_string, extract_int
